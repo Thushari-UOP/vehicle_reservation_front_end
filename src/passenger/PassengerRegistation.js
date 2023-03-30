@@ -27,17 +27,18 @@ export default class PassengerRegistation extends Component {
       name: this.state.name,
       userName: this.state.userName,
       password: this.state.password,
+      telephoneNo: this.state.telephoneNo,
       email: this.state.email,
     };
     console.log("passenger => " + JSON.stringify(passenger));
 
     PassengerService.addPassenger(passenger).then((res) => {
-      this.props.history.push("/Passenger");
+      // this.props.history.push("/Passenger");
     });
   };
 
   cancel() {
-    this.props.history.push("/Passenger");
+    // this.props.history.push("/Passenger");
   }
 
   nameChangeHandler = (event) => {
@@ -85,6 +86,7 @@ export default class PassengerRegistation extends Component {
               <Form.Group controlId="name" className="mt-4">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
+                required
                   type={"text"}
                   value={this.state.name}
                   name="name"
@@ -95,6 +97,7 @@ export default class PassengerRegistation extends Component {
               <Form.Group controlId="userName" className="mt-2">
                 <Form.Label>User Name</Form.Label>
                 <Form.Control
+                required
                   type={"text"}
                   value={this.state.userName}
                   name="userName"
@@ -105,6 +108,7 @@ export default class PassengerRegistation extends Component {
               <Form.Group controlId="password" className="mt-2">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
+              
                   type={"password"}
                   placeholder="password"
                   value={this.state.password}
@@ -116,6 +120,7 @@ export default class PassengerRegistation extends Component {
               <Form.Group controlId="email" className="mt-2">
                 <Form.Label>E-mail</Form.Label>
                 <Form.Control
+                required
                   name="email"
                   value={this.state.email}
                   type={"email"}
@@ -127,6 +132,7 @@ export default class PassengerRegistation extends Component {
               <Form.Group controlId="telephoneNo" className="mt-2">
                 <Form.Label>Telephone No.</Form.Label>
                 <Form.Control
+                  required
                   type={"text"}
                   name="telephoneNo"
                   value={this.state.telephoneNo}
