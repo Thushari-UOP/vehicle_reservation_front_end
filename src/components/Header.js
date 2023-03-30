@@ -4,7 +4,23 @@ import imag from "../Images/Car.png";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 
+
 export default function Header() {
+
+  // const DropdownComponent = props => (
+  //   <div className="form-group col-md-6">
+  //       <label>{props.labelName} :</label>
+  //       <select className="form-control" name="{props.labelName}" onChange={props.onChange}>
+  //           <option defaultValue>Select {props.labelName}</option>
+  //           {
+  //               props.options.map(option => (
+  //                   <option key={option.id} value={option.id}>{option.name}</option>
+  //               ))
+  //           }
+  //       </select>
+  //   </div>
+  // )
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -20,12 +36,12 @@ export default function Header() {
   return (
     <div>
       <nav
-        class="navbar navbar-expand-lg container-fluid fixed-top"
+        className="navbar navbar-expand-lg container-fluid fixed-top"
         style={{ background: "rgb(119 172 172)", height: "65px" }}
       >
-        <div class="container-fluid fixed-top">
+        <div className="container-fluid fixed-top">
           <div>
-            <a class="navbar-brand" href="/" style={heading_style}>
+            <a className="navbar-brand" href="/" style={heading_style}>
               <img
                 className="rounded-circle"
                 src={imag}
@@ -35,7 +51,7 @@ export default function Header() {
             </a>
           </div>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown"
@@ -43,38 +59,38 @@ export default function Header() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           <div
-            class="collapse navbar-collapse container-fluid"
+            className="collapse navbar-collapse container-fluid"
             id="navbarNavDropdown"
           >
-            <ul class="navbar-nav">
-              <li class="nav-item" className="p-3">
+            <ul className="navbar-nav">
+              <li className="nav-item p-3">
                 <Link to="/" style={heading_style}>
                   Home
                 </Link>
               </li>
-              <li class="nav-item" className="p-3">
+              <li className="nav-item p-3">
                 <Link to="/Passenger" style={heading_style}>
                   Ride
                 </Link>
               </li>
-              <li class="nav-item" className="p-3">
+              <li className="nav-item p-3">
                 <Link to="/Drive" style={heading_style}>
                   Drive
                 </Link>
               </li>
             </ul>
 
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item" className="p-3 pe-5">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item p-3 pe-5">
                 <Link to="/About" style={heading_style}>
                   About Us
                 </Link>
               </li>
-              <li class="nav-item" className="p-3 pe-5">
+              <li className="nav-item p-3 pe-5">
                 <Link onClick={handleShow} style={heading_style}>
                   Contact Us
                 </Link>

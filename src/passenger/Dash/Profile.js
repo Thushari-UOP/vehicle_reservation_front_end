@@ -1,7 +1,7 @@
 import React from "react";
 import PassengerDashSideBar from "./PassengerDashSideBar";
 import { Col, Row, Card, Container } from "react-bootstrap";
-import Header from "../../components/Header"
+import Header from "../../Components/Header"
 
 export default function Profile() {
   return (

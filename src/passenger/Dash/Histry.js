@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Card, Container, Table } from "react-bootstrap";
 import PassengerDashSideBar from "./PassengerDashSideBar";
-import Header from "../../components/Header"
+import Header from "../../Components/Header"
 
 function Histry() {
   return (

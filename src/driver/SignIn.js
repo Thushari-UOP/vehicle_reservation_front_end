@@ -1,9 +1,20 @@
 import React from "react";
 import { Card, Form, Button, FormText } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../Components/Header";
 
 export default function SignIn() {
+
+  // const myData = [{ name : "Thush" , city :"kandy" },{name : "Kamal", city :" maho"} ]
+  
+  // const signInSubmit = () => {
+
+  //   console.log(myData);
+    
+  // }
+
+  // console.log(myData);
+  
   return (
     <>
     <Header/>

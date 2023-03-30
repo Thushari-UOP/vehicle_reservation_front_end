@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Card, FormText } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../Components/Header";
 
 export default function PassengerRegistation() {
   return (
@@ -61,7 +61,7 @@ export default function PassengerRegistation() {
           </Form.Group>
 
           <Form.Group>
-            <Link to={"/Passenger/DashBord"}>
+            <Link to={"/Passenger/Profile"}>
             <Button type="submit" className="w-100 mb-4">
               Register
             </Button>

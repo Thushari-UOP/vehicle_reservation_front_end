@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Form, Button, FormText } from "react-bootstrap";
+// import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../Components/Header";
 
 export default function SignIn() {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  // const [jwt, setJwt] = useState("", "jwt");
+
+  // console.log(userName);
+
+  // function sendPassengerLoginRequest() {
+  //   const reqBody = {
+  //     userName: userName,
+  //     password: password,
+  //   };
+
+
+  //   fetch("api/auth/login", {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     method: "post",
+  //     body: JSON.stringify(reqBody),
+  //   })
+  //     .then((response) => {
+  //       if(response.status ===200)
+  //       return Promise.all([response.json(), response.headers]);
+  //       else
+  //       return Promise.reject("Invalid login attempt");
+  //     })
+  //     .then(([body, headers]) => {
+  //       setJwt(headers.get("authorization"));
+  //       window.location.href = "dashbord";
+  //     }).catch((message) =>{
+  //       alert(message);
+  //     })
+  // }
+
   return (
     <>
       <Header />
@@ -33,17 +69,26 @@ export default function SignIn() {
 
             <Form.Group controlId="userName" className="mt-4">
               <Form.Label>User Name</Form.Label>
-              <Form.Control required type="text" />
+              <Form.Control
+                required
+                type="text"
+                value={userName}
+                onChange={(event) => setUserName(event.target.value)}
+              />
             </Form.Group>
 
             <Form.Group controlId="password" className="mt-4">
               <Form.Label>Password</Form.Label>
-              <Form.Control required type="text" />
+              <Form.Control required type="text" value={password}
+              onChange = {(event) => setPassword(event.target.value)} />
             </Form.Group>
 
             <Form.Group>
-              <Link to={"/Booking"}>
-                <Button type="submit" className="w-100 mt-5">
+              <Link to={""}>
+                <Button
+                  type="submit"
+                  className="w-100 mt-5"
+                >
                   Sign In
                 </Button>
               </Link>

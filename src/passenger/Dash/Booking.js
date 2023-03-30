@@ -2,7 +2,7 @@ import React from "react";
 import PassengerDashSideBar from "./PassengerDashSideBar";
 import { Col, Row, Card, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../../components/Header"
+import Header from "../../Components/Header"
 // import Map from "../../components/Map";
 export default function Booking() {
   const vehicle = ["None..", "Car", "Van", "Bus", "Cab"];

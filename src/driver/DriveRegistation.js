@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Card, FormText, Row, Col } from "react-bootstrap";
-import Header from "../components/Header";
+import Header from "../Components/Header";
 
 export default function PassengerRegistation() {
   
@@ -203,7 +203,7 @@ export default function PassengerRegistation() {
                   <option value="male">Car</option>
                   <option value="female">Van</option>
                   <option value="female">Bus</option>
-                  <option value="female">Treewiler</option>
+                  <option value="female">Cab</option>
                   <option value="female">Other</option>
                 </Form.Select>
               </Form.Group>

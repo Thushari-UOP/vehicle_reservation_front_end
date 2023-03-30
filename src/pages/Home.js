@@ -3,12 +3,14 @@ import imag1 from "../Images/ReserveVehi.jpg";
 import imag2 from "../Images/Driver3.png";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../Components/Header";
+
+// const Home_Url = "http://localhost:8080/api/v2/";
 
 export default function Home() {
   return (
     <div className="pt-5">
-      <Header/>
+      <Header />
       <section
         className="row"
         style={{
@@ -21,30 +23,36 @@ export default function Home() {
         <div className="col-5 mt-5">
           <h2
             className="mt-5 text-center fon"
-            style={{ fontFamily: "monospace", fontSize: "x-large" }}
+            style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
             Reach the destination safely...
           </h2>
           <h2
             className="mt-5 text-center"
-            style={{ fontFamily: "monospace", fontSize: "x-large" }}
+            style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
             Choose a vehicle and driver of your wish...
           </h2>
           <h2
             className="mt-5 text-center"
-            style={{ fontFamily: "monospace", fontSize: "x-large" }}
+            style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
             Save time and easily plan future work...
           </h2>
 
           <div className="m-5 ps-5">
             <Link to="/Passenger/SignIn">
-              <Button variant="outline-dark"
-                className="m-4 ms-5 justify-content-end">Sign In</Button>
+              <Button
+                variant="outline-dark"
+                className="m-4 ms-5 justify-content-end"
+              >
+                Sign In
+              </Button>
             </Link>
             <Link to="/Passenger/Registation">
-              <Button variant="outline-dark" className="ms-5">Sign Up</Button>
+              <Button variant="outline-dark" className="ms-5">
+                Sign Up
+              </Button>
             </Link>
           </div>
         </div>
@@ -63,8 +71,50 @@ export default function Home() {
           alt=""
           style={{ height: "610px" }}
         />
+
+        <div className="">
+          <h2
+            className="text-center"
+            style={{ fontFamily: "cursive", fontSize: "x-large" , paddingTop:"100px"}}
+          >
+            Earn many with smart way...
+          </h2>
+          <h2
+            className="mt-5 text-center"
+            style={{ fontFamily: "cursive", fontSize: "x-large" }}
+          >
+            Manage your time 
+          </h2>
+          <h2
+            className="mt-5 text-center"
+            style={{ fontFamily: "cursive", fontSize: "x-large" }}
+          >
+           And
+          </h2>
+          <h2
+            className="mt-5 text-center"
+            style={{ fontFamily: "cursive", fontSize: "x-large" }}
+          >
+            Plan future work easily...
+          </h2>
+
+          <div className="m-5 ps-5">
+            <Link to="/Drive/SignIn">
+              <Button
+                variant="outline-dark"
+                className="m-4 ms-5 justify-content-end"
+              >
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/Driver/Registation">
+              <Button variant="outline-dark" className="ms-5">
+                Sign Up
+              </Button>
+            </Link>
+          </div>
+        </div>
       </section>
-      
     </div>
   );
 }
