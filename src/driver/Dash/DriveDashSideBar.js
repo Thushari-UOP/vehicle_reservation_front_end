@@ -6,7 +6,7 @@ export default function DriveDashSideBar() {
     return (
         <div>
             <div
-                className=" high pe-5 pb"
+                className=" pb"
                 style={{ minHeight: "100%" ,zIndex:'1', maxWidth: "275px", backgroundColor: " #bfb8de" }}
             >
                 <div className="ms-5 mt-5" style={{ width: "100px", height: "100px", display: "inline-flex", backgroundSize: "cover", borderRadius: "60px", backgroundImage: "url(https://img.freepik.com/premium-vector/driver-experience-symbol-man-driving-car-icon-isolated-white-background_176411-3003.jpg?w=360)" }}></div>

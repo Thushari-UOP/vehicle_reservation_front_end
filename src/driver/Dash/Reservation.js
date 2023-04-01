@@ -26,18 +26,14 @@ export default function Reservation() {
                                     Reservation Details
                                 </Card.Header>
                                 <Card.Body className="m-4" style={{ color: "darkslateblue", backgroundColor: "whitesmoke" }}>
-                                    <hr/>
+                                
                                     <ReservationCard/>
-                                    <hr className="mb-4"/>
+                                
                                     <ReservationCard/>
-                                    <hr className="mb-4"/>
+                                 
                                     <ReservationCard/>
-
-                                    <hr />
+                                
                                 </Card.Body>
-
-
-
                             </Card>
                         </Col>
                     </Row>

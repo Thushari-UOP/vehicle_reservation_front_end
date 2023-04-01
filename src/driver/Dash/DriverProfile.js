@@ -20,7 +20,6 @@ export default function DriverProfile() {
   const loadDriver = async() => {
     const result = await axios.get("http://localhost:8080/api/v1/Driver/getDriver/" + userName);
     setDriver(result.data);
-    console.log(result.data);
   }
   
   return (
