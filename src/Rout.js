@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 import Home from "./Pages/Home";
 import Passenger from "./Pages/Passenger";
@@ -20,15 +20,14 @@ import DriverProfile from "./driver/Dash/DriverProfile";
 import Reservation from "./driver/Dash/Reservation";
 import Request from "./driver/Dash/Request";
 import Ratings from "./driver/Dash/Ratings";
-import VehicleRegistation from './driver/components/VehicleRegistation';
-
+import VehicleRegistation from "./driver/components/VehicleRegistation";
 
 import { Route, Routes } from "react-router-dom";
-import UpdateDDetails from './driver/components/UpdateDDetails';
-import UpdateVehicleDetails from './driver/components/UpdateVehicleDetails';
-import UpdatePDetails from './passenger/componenets/UpdatePDetails';
+import UpdateDDetails from "./driver/components/UpdateDDetails";
+import UpdateVehicleDetails from "./driver/components/UpdateVehicleDetails";
+import UpdatePDetails from "./passenger/componenets/UpdatePDetails";
+import ProtectedRoute from "./Components/ProtectedRoute";
 // import VehicleListComponent from './driver/components/VehicleListComponent';
-
 
 export default function Rout() {
   return (
@@ -41,36 +40,55 @@ export default function Rout() {
         <Route path="/About" element={<About />} />
         {/* <Route path="/Contact" element={<Contact />} /> */}
 
-
-
         {/* Button SingIn & Registation */}
         <Route path="/Passenger/SignIn" element={<SignInToRide />} />
         <Route path="/Drive/SignIn" element={<SignInToDrive />} />
-        <Route path="/Passenger/Registation"element={<PassengerRegistation/>}/>
+        <Route
+          path="/Passenger/Registation"
+          element={<PassengerRegistation />}
+        />
         <Route path="/Driver/Registation" element={<DriveRegistation />} />
-
 
         {/* Passenger Dashbords */}
         <Route path="/Passenger/Hist" element={<Hist />} />
-        <Route path="/Passenger/Profile" element={<Profile />} />
+
+        <Route
+          path="/Passenger/Profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/Booking" element={<Booking />} />
-        <Route path='/updateUserDetails/:userName' component = {<UpdatePDetails/>}/>
+        <Route
+          path="/updateUserDetails/:userName"
+          component={<UpdatePDetails />}
+        />
 
         {/* Driver Dashbords */}
-        <Route path="/Driver/Profile" element={<DriverProfile/>}/>
+        <Route path="/Driver/Profile" element={<DriverProfile />} />
         {/* <Route path="/Driver/Calender" element={<DriverCallender/>}/> */}
-        <Route path="/Driver/Reservation" element={<Reservation/>}/>
-        <Route path="/Drive/Request" element={<Request/>}/>
-        <Route path="/Drive/Ratings" element={<Ratings/>}/>
-        <Route path='/Drive/VehicleRegistation' element={<VehicleRegistation/>}/>
-        <Route path='/updateDriverDetails/:userName' component = {<UpdateDDetails/>}/>
+        <Route path="/Driver/Reservation" element={<Reservation />} />
+        <Route path="/Drive/Request" element={<Request />} />
+        <Route path="/Drive/Ratings" element={<Ratings />} />
+        <Route
+          path="/Drive/VehicleRegistation"
+          element={<VehicleRegistation />}
+        />
+        <Route
+          path="/updateDriverDetails/:userName"
+          component={<UpdateDDetails />}
+        />
 
-        <Route path='/updateVehicleDetails/:vehicleId' component = {<UpdateVehicleDetails/>}/>
+        <Route
+          path="/updateVehicleDetails/:vehicleId"
+          component={<UpdateVehicleDetails />}
+        />
         {/* <Route path='/VehicleList/:id' component = {<VehicleListComponent/>}/> */}
 
         {/* <Route path="/Reservation/Map" element={<Map/>}/> */}
-
       </Routes>
     </div>
-  )
+  );
 }
