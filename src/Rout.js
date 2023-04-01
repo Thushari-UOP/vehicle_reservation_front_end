@@ -50,7 +50,14 @@ export default function Rout() {
         <Route path="/Driver/Registation" element={<DriveRegistation />} />
 
         {/* Passenger Dashbords */}
-        <Route path="/Passenger/Hist" element={<Hist />} />
+        <Route
+          path="/Passenger/Hist"
+          element={
+            <ProtectedRoute>
+              <Hist />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/Passenger/Profile"
@@ -63,7 +70,11 @@ export default function Rout() {
         <Route path="/Booking" element={<Booking />} />
         <Route
           path="/updateUserDetails/:userName"
-          component={<UpdatePDetails />}
+          component={
+            <ProtectedRoute>
+              <UpdatePDetails />
+            </ProtectedRoute>
+          }
         />
 
         {/* Driver Dashbords */}
@@ -77,21 +88,50 @@ export default function Rout() {
         />
 
         {/* <Route path="/Driver/Calender" element={<DriverCallender/>}/> */}
-        <Route path="/Driver/Reservation" element={<Reservation />} />
-        <Route path="/Drive/Request" element={<Request />} />
-        <Route path="/Drive/Ratings" element={<Ratings />} />
+        <Route
+          path="/Driver/Reservation"
+          element={
+            <ProtectedRoute>
+              <Reservation />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Drive/Request"
+          element={
+            <ProtectedRoute>
+              <Request />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Drive/Ratings"
+          element={
+            <ProtectedRoute>
+              <Ratings />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/Drive/VehicleRegistation"
           element={<VehicleRegistation />}
         />
         <Route
           path="/updateDriverDetails/:userName"
-          component={<UpdateDDetails />}
+          component={
+            <ProtectedRoute>
+              <UpdateDDetails />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/updateVehicleDetails/:vehicleId"
-          component={<UpdateVehicleDetails />}
+          component={
+            <ProtectedRoute>
+              <UpdateVehicleDetails />
+            </ProtectedRoute>
+          }
         />
         {/* <Route path='/VehicleList/:id' component = {<VehicleListComponent/>}/> */}
 
