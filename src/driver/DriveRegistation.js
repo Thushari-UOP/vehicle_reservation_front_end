@@ -28,7 +28,6 @@ class DriveRegistation extends Component {
     this.changeLicenceNo = this.changeLicenceNo.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
     this.changeDoB = this.changeDoB.bind(this);
-    this.addDriver = this.addDriver.bind(this);
   }
 
   addDriver = (e) => {
@@ -45,11 +44,6 @@ class DriveRegistation extends Component {
       email: this.state.email,
     };
     // console.log("driver =>" + JSON.stringify(driver));
-
-    DriverService.addDriver(driver).then((res) => {
-          this.props.navigate("/Drive");
-    });
-
   };
 
   cancel() {

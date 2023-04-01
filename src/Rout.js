@@ -67,7 +67,15 @@ export default function Rout() {
         />
 
         {/* Driver Dashbords */}
-        <Route path="/Driver/Profile" element={<DriverProfile />} />
+        <Route
+          path="/Driver/Profile"
+          element={
+            <ProtectedRoute>
+              <DriverProfile />
+            </ProtectedRoute>
+          }
+        />
+
         {/* <Route path="/Driver/Calender" element={<DriverCallender/>}/> */}
         <Route path="/Driver/Reservation" element={<Reservation />} />
         <Route path="/Drive/Request" element={<Request />} />

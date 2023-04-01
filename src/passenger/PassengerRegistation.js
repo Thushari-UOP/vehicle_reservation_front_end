@@ -3,6 +3,7 @@ import { Button, Form, Card, FormText } from "react-bootstrap";
 import Header from "../Components/Header";
 import PassengerService from "../Service/PassengerService";
 import { withRouter } from "../Components/withRouter";
+import axios from "axios";
 
 class PassengerRegistation extends Component {
   constructor(props) {
@@ -35,9 +36,14 @@ class PassengerRegistation extends Component {
 
     console.log("passenger => " + JSON.stringify(passenger));
 
-    PassengerService.addPassenger(passenger).then((res) => {
-      this.props.nevigate("/Passenger")
-    });
+    axios
+      .post("http://localhost:8080/api/v2/open/addPassenger", passenger)
+      .then((r) => {
+        console.log(r);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   cancel() {

@@ -9,24 +9,28 @@ class VehicleListComponent extends Component {
     super(props);
 
     this.state = {
-      vehicles: []
-    }
-    this.updateVehicleDetails=this.updateVehicleDetails.bind(this);
+      vehicles: [],
+    };
+    this.updateVehicleDetails = this.updateVehicleDetails.bind(this);
     this.addVehicle = this.addVehicle.bind(this);
     this.deleteVehicleDetails = this.deleteVehicleDetails.bind(this);
   }
 
-  updateVehicleDetails(vehicleId){
+  updateVehicleDetails(vehicleId) {
     this.props.navigate(`/updateVehicleDetails/${vehicleId}`);
   }
 
-  addVehicle(){
-    this.props.navigate('/updateVehicleDetails/-1');
+  addVehicle() {
+    this.props.navigate("/updateVehicleDetails/-1");
   }
 
-  deleteVehicleDetails(vehicleId){
-    DriverService.deleteVehicleDetails(vehicleId).then(res=>{
-      this.setState({vehicles: this.state.vehicles.filter(vehicle=>vehicle.vehicleId!==vehicleId)});
+  deleteVehicleDetails(vehicleId) {
+    DriverService.deleteVehicleDetails(vehicleId).then((res) => {
+      this.setState({
+        vehicles: this.state.vehicles.filter(
+          (vehicle) => vehicle.vehicleId !== vehicleId
+        ),
+      });
     });
   }
 
@@ -63,26 +67,35 @@ class VehicleListComponent extends Component {
                 <td>{vehicle.maxPassengers}</td>
                 <td>{vehicle.type}</td>
                 <td>
-                  
-                  <button onClick={()=>this.updateVehicleDetails(vehicle.vehicleId)} className="btn btn-outline-secondary my-auto me-2">Update</button>
-                  <button onClick={()=>this.deleteVehicleDetails(vehicle.vehicleId)} className="btn btn-outline-danger my-auto">Delete</button>
-                  
+                  <button
+                    onClick={() => this.updateVehicleDetails(vehicle.vehicleId)}
+                    className="btn btn-outline-secondary my-auto me-2"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => this.deleteVehicleDetails(vehicle.vehicleId)}
+                    className="btn btn-outline-danger my-auto"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
-
         </table>
-        <Button variant="outline-light" className="btn shadow-sm col-3 mt-3 mb-2" onClick={this.addVehicle}>Add Vehicle</Button>
+        <Button
+          variant="outline-light"
+          className="btn shadow-sm col-3 mt-3 mb-2"
+          onClick={this.addVehicle}
+        >
+          Add Vehicle
+        </Button>
       </div>
     );
   }
 }
 export default withRouter(VehicleListComponent);
-
-
-
-
 
 // import axios from 'axios';
 // import React, { useEffect, useState } from 'react'
@@ -99,7 +112,7 @@ export default withRouter(VehicleListComponent);
 //   },[]);
 
 //   const loadVehicles = async () => {
-//     const result = await axios.get("http://localhost:8080/api/v1/Driver/" + userName + "/allVehicles");
+//     const result = await axios.get("http://localhost:8080/api/v1/driver/" + userName + "/allVehicles");
 //     console.log(result.data);
 //   }
 
@@ -129,15 +142,15 @@ export default withRouter(VehicleListComponent);
 //                     <td>{vehicle.maxPassengers}</td>
 //                     <td>{vehicle.type}</td>
 //                     <td>
-                      
+
 //                       <button onClick={()=>this.updateVehicleDetails(vehicle.vehicleId)} className="btn btn-outline-secondary my-auto me-2">Update</button>
 //                       <button onClick={()=>this.deleteVehicleDetails(vehicle.vehicleId)} className="btn btn-outline-danger my-auto">Delete</button>
-                      
+
 //                     </td>
 //                   </tr>
 //                 ))}
 //               </tbody>
-    
+
 //             </table>
 //             <Button variant="outline-light" className="btn shadow-sm col-3 mt-3 mb-2" onClick={this.addVehicle}>Add Vehicle</Button> */}
 //           </div>

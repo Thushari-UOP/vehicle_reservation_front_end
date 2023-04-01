@@ -4,6 +4,7 @@ import { Col, Row, Card, Container } from "react-bootstrap";
 import Header from "../../Components/Header";
 import axios from "axios";
 import axiosInstance from "../../axios/axios-instance";
+import { decodeToken } from "../../utils/utils";
 
 export default function Profile() {
   const [passenger, setPassenger] = useState({});
@@ -13,7 +14,7 @@ export default function Profile() {
     loadUser();
   }, []);
 
-  const userName = "yohan2";
+  const userName = decodeToken().user.userName;
 
   const loadUser = async () => {
     const result = await axiosInstance.get(
