@@ -3,7 +3,7 @@ import React from 'react'
 import Home from "./Pages/Home";
 import Passenger from "./Pages/Passenger";
 import Drive from "./Pages/Drive";
-// import About from "./pages/About";
+import About from "./Pages/About";
 // import Contact from "./pages/Contact";
 
 import SignInToRide from "./passenger/SignIn";
@@ -38,7 +38,7 @@ export default function Rout() {
         <Route path="/" element={<Home />} />
         <Route path="/Passenger" element={<Passenger />} />
         <Route path="/Drive" element={<Drive />} />
-        {/* <Route path="/About" element={<About />} /> */}
+        <Route path="/About" element={<About />} />
         {/* <Route path="/Contact" element={<Contact />} /> */}
 
 

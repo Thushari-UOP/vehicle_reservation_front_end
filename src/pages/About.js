@@ -1,9 +1,11 @@
 import React from "react";
-import Header from "../Components/Header";
+import imag from "../Images/Select_vehicle.jpg"; 
+
 export default function About() {
   return (
-    <>
-      <Header />
-    </>
+   <>
+    <img className="w-100" src={imag} alt="" />
+   </>
+   
   );
 }
