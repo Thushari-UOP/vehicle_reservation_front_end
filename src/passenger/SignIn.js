@@ -16,10 +16,9 @@ export default function SignIn() {
   // console.log(userName);
 
   function sendPassengerLoginRequest() {
-    console.log("click");
     const reqBody = {
-      email: "passenger@a.com",
-      password: "aa",
+      email: userName,
+      password: password,
     };
 
     axiosInstance
