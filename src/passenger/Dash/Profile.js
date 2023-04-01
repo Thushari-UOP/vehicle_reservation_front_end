@@ -9,10 +9,11 @@ export default function Profile() {
   const [passenger, setPassenger] = useState({});
 
   useEffect(() => {
+    console.log("first");
     loadUser();
-  });
+  }, []);
 
-  const userName = "sgs";
+  const userName = "yohan2";
 
   const loadUser = async () => {
     const result = await axiosInstance.get(
