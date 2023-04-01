@@ -25,7 +25,7 @@ export default function SignIn() {
       .post("http://localhost:8080/api/v2/open/passenger/login", reqBody)
       .then((r) => {
         console.log(r);
-        if (r.status === 200) {
+        if (r?.data?.success === true) {
           localStorage.setItem("token", r?.data?.response?.token);
           alert("Login Success");
           // /Passenger/Profile
