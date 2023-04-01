@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Form, Card, FormText, Row, Col, Button } from "react-bootstrap";
 import Header from "../Components/Header";
 import DriverService from "../Service/DriverService";
+import { withRouter } from "../Components/withRouter";
 
-export default class DriveRegistation extends Component {
+class DriveRegistation extends Component {
   constructor(props) {
     super(props);
 
@@ -43,15 +44,16 @@ export default class DriveRegistation extends Component {
       dob: this.state.dob,
       email: this.state.email,
     };
-    console.log("driver =>" + JSON.stringify(driver));
+    // console.log("driver =>" + JSON.stringify(driver));
 
     DriverService.addDriver(driver).then((res) => {
-      this.props.history.push("/Drive");
+          this.props.navigate("/Drive");
     });
+
   };
 
   cancel() {
-    this.props.history.push("/Drive");
+    this.props.navigate("/Drive");
   }
 
   changeUserName = (event) => {
@@ -61,7 +63,6 @@ export default class DriveRegistation extends Component {
   changefirstName = (event) => {
     this.setState({ firstName: event.target.value });
   };
-
   changeLastName = (event) => {
     this.setState({ lastName: event.target.value });
   };
@@ -119,7 +120,6 @@ export default class DriveRegistation extends Component {
                 >
                   <Form.Label>User Name</Form.Label>
                   <Form.Control
-                    required
                     type={"text"}
                     name="userName"
                     value={this.state.userName}
@@ -136,7 +136,6 @@ export default class DriveRegistation extends Component {
                 >
                   <Form.Label>Password</Form.Label>
                   <Form.Control
-                    required
                     type={"password"}
                     name="password"
                     value={this.state.password}
@@ -155,7 +154,6 @@ export default class DriveRegistation extends Component {
                 >
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
-                    required
                     type={"text"}
                     name="fistName"
                     value={this.state.firstName}
@@ -172,7 +170,6 @@ export default class DriveRegistation extends Component {
                 >
                   <Form.Label>Last Name</Form.Label>
                   <Form.Control
-                    required
                     type={"text"}
                     name="lastName"
                     value={this.state.lastName}
@@ -192,6 +189,16 @@ export default class DriveRegistation extends Component {
                     size="sm"
                   />
                 </Form.Group>
+                <Form.Group as={Col} md="6" controlId="gender" className="mt-2">
+                  <Form.Label>Gender</Form.Label>
+                  <Form.Select
+                    aria-label="Floating label select example"
+                    size="sm"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </Form.Select>
+                </Form.Group>
               </Row>
 
               <Row>
@@ -203,7 +210,6 @@ export default class DriveRegistation extends Component {
                 >
                   <Form.Label>Telephone</Form.Label>
                   <Form.Control
-                    required
                     placeholder="xxx xxxxxxx"
                     type={"text"}
                     name="telephone"
@@ -221,7 +227,6 @@ export default class DriveRegistation extends Component {
                 >
                   <Form.Label>E-Mail</Form.Label>
                   <Form.Control
-                    required
                     type={"email"}
                     placeholder="example@gmail.com"
                     name="email"
@@ -247,13 +252,12 @@ export default class DriveRegistation extends Component {
 
               <Form.Group
                 as={Col}
-                md="7"
+                md="8"
                 controlId="licenceNo"
-                className="mt-3"
+                className="mt-2 mb-4 w-100"
               >
                 <Form.Label>License No.</Form.Label>
                 <Form.Control
-                  required
                   type={"text"}
                   name="liceneceNo"
                   value={this.state.licenceNo}
@@ -303,3 +307,4 @@ export default class DriveRegistation extends Component {
     );
   }
 }
+export default withRouter(DriveRegistation);

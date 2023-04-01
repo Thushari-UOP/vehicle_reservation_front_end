@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import DriverService from '../../Service/DriverService';
 import { Form, FormText, Col, Button, Card } from 'react-bootstrap'
-import Header from '../../Components/Header';
-import { withParams } from '../../Components/withRouter';
+// import Header from '../../Components/Header';
+import { withRouter } from '../../Components/withRouter';
 // import { useParams } from 'react-router-dom';
 // import { withRouter } from '../../Components/withRouter';
 
@@ -57,8 +57,8 @@ class UpdateVehicleDetails extends Component {
     console.log('vehicle =>' + JSON.stringify(vehicle));
     console.log('vehicle => '+ JSON.stringify(this.state.vehicleId));
     DriverService.updateVehicleDetails(vehicle,this.state.vehicleId).then(res=>{
-      this.props.navigate('/')
-    })
+      this.props.navigate('/Driver/Profile');
+    });
   }
 
   vehicleNumberHandler = (event) => {
@@ -77,10 +77,14 @@ class UpdateVehicleDetails extends Component {
     this.setState({ maxPassengers: event.target.value });
   }
 
+  cancel(){
+    this.props.navigate('/Driver/Profile');
+  }
+
   render() {
     return (
       <>
-        <Header />
+        {/* <Header /> */}
         <div className='mt-5 bg-black'>
           <Card className='mx-auto' >
             <Form className='mx-auto w-75'>
@@ -198,4 +202,4 @@ class UpdateVehicleDetails extends Component {
     );
   }
 }
-export default withParams(UpdateVehicleDetails)
+export default withRouter(UpdateVehicleDetails)

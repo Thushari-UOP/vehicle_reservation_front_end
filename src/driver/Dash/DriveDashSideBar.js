@@ -16,6 +16,10 @@ export default function DriveDashSideBar() {
                         <Link to={"/Driver/Profile"} style={{ color: "darkblue" }}>Profile</Link>
                     </Nav>
 
+                    {/* <Nav className="pb-3 fw-bold gx-xl-4">
+                        <Link to={"/VehicleList/:id"} style={{ color: "darkblue" }}>Vehicle Details</Link>
+                    </Nav> */}
+
                     <Nav className="pb-3 fw-bold gx-xl-4">
                         <Link to={"/Driver/Reservation"} style={{ color: "darkblue" }}>Reservations</Link>
                     </Nav>
@@ -24,9 +28,9 @@ export default function DriveDashSideBar() {
                         <Link to={"/Drive/Request"} style={{ color: "darkblue" }}>Request</Link>
                     </Nav>
 
-                    <Nav className="pb-3 fw-bold gx-xl-4">
+                    {/* <Nav className="pb-3 fw-bold gx-xl-4">
                         <Link to={"/Driver/Calender"} style={{ color: "darkblue" }}>Callender</Link>
-                    </Nav>
+                    </Nav> */}
 
                     <Nav className="pb-3 fw-bold gx-xl-4">
                         <Link to={"/Drive/Ratings"} style={{ color: "darkblue" }}>Ratings</Link>

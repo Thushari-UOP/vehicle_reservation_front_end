@@ -36,7 +36,7 @@ export default function Header() {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg container-fluid fixed-top"
+        className="navbar shadow navbar-expand-lg container-fluid fixed-top"
         style={{ background: "rgb(119 172 172)", height: "65px" }}
       >
         <div className="container-fluid fixed-top">

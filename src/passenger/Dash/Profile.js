@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PassengerDashSideBar from "./PassengerDashSideBar";
 import { Col, Row, Card, Container } from "react-bootstrap";
 import Header from "../../Components/Header"
+import axios from "axios";
 
 export default function Profile() {
+
+const [passenger, setPassenger] = useState({});
+
+useEffect(() => {
+  loadUser();
+});
+
+const userName = "sgs";
+
+const loadUser = async() => {
+  const result = await axios.get("http://localhost:8080/api/v1/Passenger/getPassenger/" + userName);
+  setPassenger(result.data);
+}
+
   return (
     <div>
       <Header/>
@@ -25,12 +40,12 @@ export default function Profile() {
                   User Details
                 </Card.Subtitle>
                 <br />
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item col-12 mb-3">Name : </li>
-                  <li class="list-group-item col-12 mb-3">User Name : </li>
-                  <li class="list-group-item col-12 mb-3">Password : </li>
-                  <li class="list-group-item col-12 mb-3">E-mail : </li>
-                  <li class="list-group-item col-12 mb-3">Telephone No: </li>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item col-12 mb-3">Name : {passenger.name} </li>
+                  <li className="list-group-item col-12 mb-3">User Name : {passenger.userName} </li>
+                  <li className="list-group-item col-12 mb-3">Password : {passenger.password} </li>
+                  <li className="list-group-item col-12 mb-3">E-mail : {passenger.email} </li>
+                  <li className="list-group-item col-12 mb-3">Telephone No: {passenger.telephoneNo}</li>
                   <li style={{listStyle: "none"}}></li>
                 </ul>
               </Card.Body>

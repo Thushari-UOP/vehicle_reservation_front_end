@@ -1,11 +1,13 @@
 import axios from "axios";
 
-const PASSENGER_API_ADD = "http://localhost:8080/api/v1/Passenger/add";
+const PASSENGER_API = "http://localhost:8080/api/v1/Passenger";
 
 class PassengerService{
     addPassenger(passenger){
-        return axios.post(PASSENGER_API_ADD,passenger);
+        return axios.post(PASSENGER_API + '/add',passenger);
     }
+
+
 }
 
 export default new PassengerService()
