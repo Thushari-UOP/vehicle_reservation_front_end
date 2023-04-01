@@ -1,44 +1,42 @@
 import React, { useState } from "react";
 import { Card, Form, Button, FormText } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
-import { Link } from "react-router-dom";
+import axiosInstance from "../axios/axios-instance";
 import Header from "../Components/Header";
 
 export default function SignIn() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   // const [jwt, setJwt] = useState("", "jwt");
 
   // console.log(userName);
 
-  // function sendPassengerLoginRequest() {
-  //   const reqBody = {
-  //     userName: userName,
-  //     password: password,
-  //   };
+  function sendPassengerLoginRequest() {
+    console.log("click");
+    const reqBody = {
+      email: "passenger@a.com",
+      password: "aa",
+    };
 
-
-  //   fetch("api/auth/login", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     method: "post",
-  //     body: JSON.stringify(reqBody),
-  //   })
-  //     .then((response) => {
-  //       if(response.status ===200)
-  //       return Promise.all([response.json(), response.headers]);
-  //       else
-  //       return Promise.reject("Invalid login attempt");
-  //     })
-  //     .then(([body, headers]) => {
-  //       setJwt(headers.get("authorization"));
-  //       window.location.href = "dashbord";
-  //     }).catch((message) =>{
-  //       alert(message);
-  //     })
-  // }
+    axiosInstance
+      .post("http://localhost:8080/api/v2/open/passenger/login", reqBody)
+      .then((r) => {
+        console.log(r);
+        if (r.status === 200) {
+          localStorage.setItem("token", r?.data?.response?.token);
+          alert("Login Success");
+          // /Passenger/Profile
+          navigate("/Passenger/Profile");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
 
   return (
     <>
@@ -55,6 +53,7 @@ export default function SignIn() {
           marginTop: "50px",
         }}
       >
+        <Button onClick={sendPassengerLoginRequest}>hello</Button>
         <Card
           className="p-5"
           style={{
@@ -68,10 +67,10 @@ export default function SignIn() {
             </FormText>
 
             <Form.Group controlId="userName" className="mt-4">
-              <Form.Label>User Name</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 required
-                type="text"
+                type="email"
                 value={userName}
                 onChange={(event) => setUserName(event.target.value)}
               />
@@ -79,19 +78,22 @@ export default function SignIn() {
 
             <Form.Group controlId="password" className="mt-4">
               <Form.Label>Password</Form.Label>
-              <Form.Control required type="text" value={password}
-              onChange = {(event) => setPassword(event.target.value)} />
+              <Form.Control
+                required
+                type="text"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
             </Form.Group>
 
             <Form.Group>
-              <Link to={"/Passenger/Profile"}>
-                <Button
-                  type="submit"
-                  className="w-100 mt-5"
-                >
-                  Sign In
-                </Button>
-              </Link>
+              <Button
+                type="button"
+                className="w-100 mt-5"
+                onClick={sendPassengerLoginRequest}
+              >
+                Sign In
+              </Button>
             </Form.Group>
           </Form>
         </Card>
