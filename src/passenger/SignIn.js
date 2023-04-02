@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 import axiosInstance from "../axios/axios-instance";
 import Header from "../Components/Header";
+import axios from "axios";
 
 export default function SignIn() {
   const [userName, setUserName] = useState("");
@@ -21,7 +22,7 @@ export default function SignIn() {
       password: password,
     };
 
-    axiosInstance
+    axios
       .post("http://localhost:8080/api/v2/open/passenger/login", reqBody)
       .then((r) => {
         console.log(r);

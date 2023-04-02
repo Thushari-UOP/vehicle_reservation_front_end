@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Form, Card, FormText, Row, Col, Button } from "react-bootstrap";
 import Header from "../Components/Header";
-import DriverService from "../Service/DriverService";
 import { withRouter } from "../Components/withRouter";
+import axios from "axios";
 
 class DriveRegistation extends Component {
   constructor(props) {
@@ -43,9 +43,18 @@ class DriveRegistation extends Component {
       dob: this.state.dob,
       email: this.state.email,
     };
-    // console.log("driver =>" + JSON.stringify(driver));
-  };
+    console.log("driver =>" + JSON.stringify(driver));
 
+    axios
+      .post("http://localhost:8080/api/v2/open/addDriver", driver)
+      .then((r) => {
+        console.log(r);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  
   cancel() {
     this.props.navigate("/Drive");
   }

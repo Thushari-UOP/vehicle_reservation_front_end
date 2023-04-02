@@ -12,7 +12,7 @@ export default function SignIn() {
     axios
       .post("http://localhost:8080/api/v2/open/driver/login", {
         email: userName,
-        password,
+        password: password,
       })
       .then((r) => {
         console.log(r);
