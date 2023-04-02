@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import DriverService from '../../Service/DriverService';
-import { Form, FormText, Col, Button, Card } from 'react-bootstrap'
+import React, { Component } from "react";
+import DriverService from "../../Service/DriverService";
+import { Form, FormText, Col, Button, Card } from "react-bootstrap";
 // import Header from '../../Components/Header';
-import { withRouter } from '../../Components/withRouter';
+import { withRouter } from "../../Components/withRouter";
+import axiosInstance from "../../axios/axios-instance";
 // import { useParams } from 'react-router-dom';
 // import { withRouter } from '../../Components/withRouter';
 
@@ -17,8 +18,8 @@ class UpdateVehicleDetails extends Component {
       maxDays: "",
       maxLength: "",
       maxPassengers: "",
-      type: ""
-    }
+      type: "",
+    };
     this.vehicleNumberHandler = this.vehicleNumberHandler.bind(this);
     this.insuranceNoHandler = this.insuranceNoHandler.bind(this);
     this.maxDaysHandler = this.maxDaysHandler.bind(this);
@@ -28,20 +29,24 @@ class UpdateVehicleDetails extends Component {
   }
 
   componentDidMount() {
-    DriverService.getVehiceleById(this.state.id).then((res) => {
-      let vehicle = res.data;
-      this.setState({
-        vehicleId: vehicle.vehicleId,
-        insuranceNo: vehicle.insuranceNo,
-        maxDays: vehicle.maxDays,
-        maxLength: vehicle.maxLength,
-        maxPassengers: vehicle.maxPassengers,
-        type: vehicle.type
+    console.log(this.state);
+    axiosInstance
+      .get(
+        "http://localhost:8080/api/v1/Vehicle/getVehicleById/" +
+          this.state.vehicleId
+      )
+      .then((res) => {
+        let vehicle = res.data;
+        this.setState({
+          vehicleId: vehicle.vehicleId,
+          insuranceNo: vehicle.insuranceNo,
+          maxDays: vehicle.maxDays,
+          maxLength: vehicle.maxLength,
+          maxPassengers: vehicle.maxPassengers,
+          type: vehicle.type,
+        });
       });
-    });
-    console.log(this.componentDidMount);
   }
-
 
   updateVehicleDetails = (e) => {
     e.preventDefault();
@@ -52,44 +57,48 @@ class UpdateVehicleDetails extends Component {
       maxDays: this.state.maxDays,
       maxLength: this.state.maxLength,
       maxPassengers: this.state.maxPassengers,
-      type: this.state.type
-    }
-    console.log('vehicle =>' + JSON.stringify(vehicle));
-    console.log('vehicle => '+ JSON.stringify(this.state.vehicleId));
-    DriverService.updateVehicleDetails(vehicle,this.state.vehicleId).then(res=>{
-      this.props.navigate('/Driver/Profile');
-    });
-  }
+      type: this.state.type,
+    };
+    console.log("vehicle =>" + JSON.stringify(vehicle));
+    console.log("vehicle => " + JSON.stringify(this.state.vehicleId));
+    DriverService.updateVehicleDetails(vehicle, this.state.vehicleId).then(
+      (res) => {
+        this.props.navigate("/Driver/Profile");
+      }
+    );
+  };
 
   vehicleNumberHandler = (event) => {
     this.setState({ vehicleNumber: event.target.value });
-  }
+  };
   insuranceNoHandler = (event) => {
     this.setState({ insuranceNo: event.target.value });
-  }
+  };
   maxDaysHandler = (event) => {
     this.setState({ maxDays: event.target.value });
-  }
+  };
   maxLengthHandler = (event) => {
     this.setState({ maxLength: event.target.value });
-  }
+  };
   maxPassengersHandler = (event) => {
     this.setState({ maxPassengers: event.target.value });
-  }
+  };
 
-  cancel(){
-    this.props.navigate('/Driver/Profile');
+  cancel() {
+    this.props.navigate("/Driver/Profile");
   }
 
   render() {
     return (
       <>
         {/* <Header /> */}
-        <div className='mt-5 bg-black'>
-          <Card className='mx-auto' >
-            <Form className='mx-auto w-75'>
+        <div className="mt-5 bg-black">
+          <Card className="mx-auto">
+            <Form className="mx-auto w-75">
               <FormText>
-                <h5 className="font-monospace fw-bolder mt-5 text-decoration-underline">Vehicle Updatetion Form</h5>
+                <h5 className="font-monospace fw-bolder mt-5 text-decoration-underline">
+                  Vehicle Updatetion Form
+                </h5>
               </FormText>
 
               <Form.Group
@@ -99,9 +108,17 @@ class UpdateVehicleDetails extends Component {
                 className="mt-2"
               >
                 <Form.Label>Vehicle Type</Form.Label>
-                <Form.Control required checked placeholder='VAN / CAR / BUS' type={"text"} name="type" value={this.state.vehicleNumber} onChange={this.vehicleNumberHandler} size="sm" />
+                <Form.Control
+                  required
+                  checked
+                  placeholder="VAN / CAR / BUS"
+                  type={"text"}
+                  name="type"
+                  value={this.state.vehicleNumber}
+                  onChange={this.vehicleNumberHandler}
+                  size="sm"
+                />
               </Form.Group>
-
 
               {/* <Form.Group
                 as={Col}
@@ -131,9 +148,16 @@ class UpdateVehicleDetails extends Component {
                 className="mt-2"
               >
                 <Form.Label>Vehicle Number</Form.Label>
-                <Form.Control required checked type={"text"} name="vehicleNumber" value={this.state.vehicleNumber} onChange={this.vehicleNumberHandler} size="sm" />
+                <Form.Control
+                  required
+                  checked
+                  type={"text"}
+                  name="vehicleNumber"
+                  value={this.state.vehicleNumber}
+                  onChange={this.vehicleNumberHandler}
+                  size="sm"
+                />
               </Form.Group>
-
 
               <Form.Group
                 as={Col}
@@ -142,17 +166,43 @@ class UpdateVehicleDetails extends Component {
                 className="mt-3"
               >
                 <Form.Label>Insurance Number</Form.Label>
-                <Form.Control required type={"text"} size="sm" name='insuranceNo' value={this.state.insuranceNo} onChange={this.insuranceNoHandler} />
+                <Form.Control
+                  required
+                  type={"text"}
+                  size="sm"
+                  name="insuranceNo"
+                  value={this.state.insuranceNo}
+                  onChange={this.insuranceNoHandler}
+                />
               </Form.Group>
 
               <Form.Group as={Col} md="7" controlId="maxDays" className="mt-3">
                 <Form.Label>Maximum No of Days for a Trip</Form.Label>
-                <Form.Control required type={"number"} name="maxDays" value={this.state.maxDays} onChange={this.maxDaysHandler} size="sm" />
+                <Form.Control
+                  required
+                  type={"number"}
+                  name="maxDays"
+                  value={this.state.maxDays}
+                  onChange={this.maxDaysHandler}
+                  size="sm"
+                />
               </Form.Group>
 
-              <Form.Group as={Col} md="7" controlId="maxLength" className="mt-3">
+              <Form.Group
+                as={Col}
+                md="7"
+                controlId="maxLength"
+                className="mt-3"
+              >
                 <Form.Label>Maximum length for a Trip</Form.Label>
-                <Form.Control required type={"number"} name='maxLength' value={this.state.maxLength} onChange={this.maxLengthHandler} size="sm" />
+                <Form.Control
+                  required
+                  type={"number"}
+                  name="maxLength"
+                  value={this.state.maxLength}
+                  onChange={this.maxLengthHandler}
+                  size="sm"
+                />
               </Form.Group>
 
               <Form.Group
@@ -162,7 +212,14 @@ class UpdateVehicleDetails extends Component {
                 className="mt-3"
               >
                 <Form.Label>Maximum No of Passengers</Form.Label>
-                <Form.Control required type={"number"} name="maxPassengers" value={this.state.maxPassengers} onChange={this.maxPassengersHandler} size="sm" />
+                <Form.Control
+                  required
+                  type={"number"}
+                  name="maxPassengers"
+                  value={this.state.maxPassengers}
+                  onChange={this.maxPassengersHandler}
+                  size="sm"
+                />
               </Form.Group>
 
               <Form.Group
@@ -182,16 +239,25 @@ class UpdateVehicleDetails extends Component {
               </Form.Group>
 
               <Form.Group className="mt-4" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Above all details are true." />
+                <Form.Check
+                  type="checkbox"
+                  label="Above all details are true."
+                />
               </Form.Group>
 
-              <Form.Group className='row'>
-                <Button type={"submit"} className="mb-5 mt-5 ms-5 me-5 col-2"
-                  onClick={this.updateVehicleDetails}>
+              <Form.Group className="row">
+                <Button
+                  type={"submit"}
+                  className="mb-5 mt-5 ms-5 me-5 col-2"
+                  onClick={this.updateVehicleDetails}
+                >
                   Update Details
                 </Button>
-                <Button type={"submit"} className="mb-5 mt-5 ms-5 me-2 col-2"
-                  onClick={this.cancel}>
+                <Button
+                  type={"submit"}
+                  className="mb-5 mt-5 ms-5 me-2 col-2"
+                  onClick={this.cancel}
+                >
                   Cancell
                 </Button>
               </Form.Group>
@@ -202,4 +268,4 @@ class UpdateVehicleDetails extends Component {
     );
   }
 }
-export default withRouter(UpdateVehicleDetails)
+export default withRouter(UpdateVehicleDetails);

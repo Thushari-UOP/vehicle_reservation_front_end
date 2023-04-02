@@ -70,7 +70,7 @@ export default function Rout() {
         <Route path="/Booking" element={<Booking />} />
         <Route
           path="/updateUserDetails/:userName"
-          component={
+          element={
             <ProtectedRoute>
               <UpdatePDetails />
             </ProtectedRoute>
