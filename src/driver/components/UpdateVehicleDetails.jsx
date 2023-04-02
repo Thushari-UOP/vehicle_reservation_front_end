@@ -25,6 +25,7 @@ class UpdateVehicleDetails extends Component {
     this.maxDaysHandler = this.maxDaysHandler.bind(this);
     this.maxLengthHandler = this.maxLengthHandler.bind(this);
     this.maxPassengersHandler = this.maxPassengersHandler.bind(this);
+    this.typeHandler = this.typeHandler.bind(this);
     this.updateVehicleDetails = this.updateVehicleDetails.bind(this);
   }
 
@@ -83,6 +84,9 @@ class UpdateVehicleDetails extends Component {
   maxPassengersHandler = (event) => {
     this.setState({ maxPassengers: event.target.value });
   };
+  typeHandler = (event) => {
+    this.setState({ type: event.target.value});
+  };
 
   cancel() {
     this.props.navigate("/Driver/Profile");
@@ -114,32 +118,11 @@ class UpdateVehicleDetails extends Component {
                   placeholder="VAN / CAR / BUS"
                   type={"text"}
                   name="type"
-                  value={this.state.vehicleNumber}
-                  onChange={this.vehicleNumberHandler}
+                  value={this.state.type}
+                  onChange={this.typeHandler}
                   size="sm"
                 />
               </Form.Group>
-
-              {/* <Form.Group
-                as={Col}
-                md="6"
-                controlId="type"
-                className="mt-5"
-              >
-                <Form.Label>Vehicle Type</Form.Label>
-                <Form.Select
-                  required
-                  name='type'
-                  onChange={this.vehicleTypeChangeHandle}
-                  aria-label="Floating label select example"
-                  size="sm"
-                >
-                  <option defaultValue={"CAR"}>CAR</option>
-                  <option defaultValue={"VAN"}>VAN</option>
-                  <option defaultValue={"BUS"}>BUS</option>
-
-                </Form.Select>
-              </Form.Group> */}
 
               <Form.Group
                 as={Col}
