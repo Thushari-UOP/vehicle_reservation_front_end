@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, FormText, Col, Button, Card } from 'react-bootstrap'
 import Header from '../../Components/Header';
-import { withRouter  } from '../../Components/withRouter';
+import { withRouter } from '../../Components/withRouter';
 import DriverService from '../../Service/DriverService';
 
 class VehicleRegistation extends Component {
@@ -30,7 +30,7 @@ class VehicleRegistation extends Component {
 
     componentDidMount() {
 
-        if (this.sate.vehicleId === '_add') {
+        if (this.sate.vehicleId === -1) {
             return
         } else {
             DriverService.getVehiceleById(this.state.vehicleId).then((res) => {
@@ -59,19 +59,19 @@ class VehicleRegistation extends Component {
         };
         console.log("vehicle =>" + JSON.stringify(vehicle));
 
-        if (this.state.vehicleId === '_add') {
+        if (this.state.vehicleId === -1) {
             DriverService.addVehicle(vehicle).then((res) => {
                 this.props.navigate('/Driver/Profile');
             });
         } else {
-            DriverService.updateVehicle(vehicle, this.sate.id).then(res => {
+            DriverService.updateVehicle(vehicle, this.sate.vehicleId).then(res => {
                 this.props.navigate('/Driver/Profile');
             });
         }
     }
 
     getTitle() {
-        if (this.state.vehicleId === '_add') {
+        if (this.state.vehicleId === -1) {
             return <h3 className="text-center">Add Vehicle</h3>
         } else {
             return <h3 className="text-center">Update Vehicle</h3>
@@ -112,7 +112,9 @@ class VehicleRegistation extends Component {
                     <Card className='mx-auto' >
                         <Form className='mx-auto w-75'>
                             <FormText>
+                                {
                                 this.getTitle()
+                                }
                             </FormText>
 
                             <Form.Group
@@ -174,12 +176,14 @@ class VehicleRegistation extends Component {
                                 className="mt-3"
                             >
                                 <Form.Label>Service Areas</Form.Label>
-                                <Form.Control/>
+                                <Form.Control />
                             </Form.Group>
 
                             <Form.Group className="mt-4" controlId="formBasicCheckbox">
                                 <Form.Check type="checkbox" label="Above all details are true." />
                             </Form.Group>
+
+
 
                             <Form.Group className='row'>
                                 <Button type={"submit"} className="mb-5 mt-5 ms-5 me-5 col-2"

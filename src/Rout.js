@@ -127,7 +127,7 @@ export default function Rout() {
 
         <Route
           path="/updateVehicleDetails/:vehicleId"
-          component={
+          element={
             <ProtectedRoute>
               <UpdateVehicleDetails />
             </ProtectedRoute>

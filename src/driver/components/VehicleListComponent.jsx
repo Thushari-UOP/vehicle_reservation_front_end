@@ -11,39 +11,39 @@ class VehicleListComponent extends Component {
     this.state = {
       vehicles: [],
     };
-    this.updateVehicleDetails = this.updateVehicleDetails.bind(this);
-    this.addVehicle = this.addVehicle.bind(this);
-    this.deleteVehicleDetails = this.deleteVehicleDetails.bind(this);
+    // this.updateVehicleDetails = this.updateVehicleDetails.bind(this);
+    // this.addVehicle = this.addVehicle.bind(this);
+    // this.deleteVehicleDetails = this.deleteVehicleDetails.bind(this);
   }
 
-  updateVehicleDetails(vehicleId) {
-    this.props.navigate(`/updateVehicleDetails/${vehicleId}`);
-  }
+  // updateVehicleDetails(vehicleId) {
+  //   this.props.navigate(`/updateVehicleDetails/${vehicleId}`);
+  // }
 
-  addVehicle() {
-    this.props.navigate("/updateVehicleDetails/-1");
-  }
+  // addVehicle() {
+  //   this.props.navigate("/updateVehicleDetails/-1");
+  // }
 
-  deleteVehicleDetails(vehicleId) {
-    DriverService.deleteVehicleDetails(vehicleId).then((res) => {
-      this.setState({
-        vehicles: this.state.vehicles.filter(
-          (vehicle) => vehicle.vehicleId !== vehicleId
-        ),
-      });
-    });
-  }
+  // deleteVehicleDetails(vehicleId) {
+  //   DriverService.deleteVehicleDetails(vehicleId).then((res) => {
+  //     this.setState({
+  //       vehicles: this.state.vehicles.filter(
+  //         (vehicle) => vehicle.vehicleId !== vehicleId
+  //       ),
+  //     });
+  //   });
+  // }
 
-  componentDidMount() {
-    DriverService.getVehicles().then((res) => {
-      this.setState({ vehicles: res.data });
-    });
-  }
+  // componentDidMount() {
+  //   DriverService.getVehicles().then((res) => {
+  //     this.setState({ vehicles: res.data });
+  //   });
+  // }
 
   render() {
     return (
       <div className="row">
-        <table className="table table-striped table-hover table-bordered">
+        {/* <table className="table table-striped table-hover table-bordered">
           <thead>
             <tr>
               <th>Id</th>
@@ -83,14 +83,14 @@ class VehicleListComponent extends Component {
               </tr>
             ))}
           </tbody>
-        </table>
-        <Button
+        </table> */}
+        {/* <Button
           variant="outline-light"
           className="btn shadow-sm col-3 mt-3 mb-2"
           onClick={this.addVehicle}
         >
           Add Vehicle
-        </Button>
+        </Button> */}
       </div>
     );
   }
