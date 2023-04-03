@@ -4,6 +4,7 @@ import { Form, FormText, Col, Button, Card } from "react-bootstrap";
 // import Header from '../../Components/Header';
 import { withRouter } from "../../Components/withRouter";
 import axiosInstance from "../../axios/axios-instance";
+import { Link } from "react-router-dom";
 // import { useParams } from 'react-router-dom';
 // import { withRouter } from '../../Components/withRouter';
 
@@ -29,17 +30,18 @@ class UpdateVehicleDetails extends Component {
     this.updateVehicleDetails = this.updateVehicleDetails.bind(this);
   }
 
+
   componentDidMount() {
     console.log(this.state);
     axiosInstance
       .get(
-        "http://localhost:8080/api/v1/Vehicle/getVehicleById/" +
-          this.state.vehicleId
+        "http://localhost:8080/api/v1/Vehicle/getVehicleById/" + this.state.vehicleId
       )
       .then((res) => {
         let vehicle = res.data;
         this.setState({
           vehicleId: vehicle.vehicleId,
+          vehicleNumber: vehicle.vehicleNumber,
           insuranceNo: vehicle.insuranceNo,
           maxDays: vehicle.maxDays,
           maxLength: vehicle.maxLength,
@@ -49,8 +51,19 @@ class UpdateVehicleDetails extends Component {
       });
   }
 
+
+  // if (this.state.vehicleId === -1) {
+
+  // }
   updateVehicleDetails = (e) => {
     e.preventDefault();
+    let vehicleDetails = {
+      insuranceNo: this.state.insuranceNo,
+      maxDays: this.state.maxDays,
+      maxLength: this.state.maxLength,
+      maxPassengers: this.state.maxPassengers,
+    };
+
     let vehicle = {
       vehicleId: this.state.vehicleId,
       vehicleNumber: this.state.vehicleNumber,
@@ -59,14 +72,16 @@ class UpdateVehicleDetails extends Component {
       maxLength: this.state.maxLength,
       maxPassengers: this.state.maxPassengers,
       type: this.state.type,
-    };
-    console.log("vehicle =>" + JSON.stringify(vehicle));
-    console.log("vehicle => " + JSON.stringify(this.state.vehicleId));
-    DriverService.updateVehicleDetails(vehicle, this.state.vehicleId).then(
-      (res) => {
-        this.props.navigate("/Driver/Profile");
-      }
-    );
+    }
+    console.log("vehicleUpdateDetails =>" + JSON.stringify(vehicleDetails));
+    console.log("vehicle => " + JSON.stringify(vehicle));
+
+    DriverService.updateVehicleDetails(this.state.vehicleId, vehicleDetails)
+      .then(
+        (res) => {
+          this.props.navigate("/Driver/Profile");
+        }
+      );
   };
 
   vehicleNumberHandler = (event) => {
@@ -85,11 +100,19 @@ class UpdateVehicleDetails extends Component {
     this.setState({ maxPassengers: event.target.value });
   };
   typeHandler = (event) => {
-    this.setState({ type: event.target.value});
+    this.setState({ type: event.target.value });
   };
 
-  cancel() {
-    this.props.navigate("/Driver/Profile");
+  // cancel() {
+  //   this.props.navigate("/Driver/Profile");
+  // }
+
+  getTitle() {
+    if (this.state.vehicleId === -1) {
+      return <h3 className="text-center">Add Vehicle</h3>
+    } else {
+      return <h3 className="text-center">Update Vehicle</h3>
+    }
   }
 
   render() {
@@ -100,9 +123,10 @@ class UpdateVehicleDetails extends Component {
           <Card className="mx-auto">
             <Form className="mx-auto w-75">
               <FormText>
-                <h5 className="font-monospace fw-bolder mt-5 text-decoration-underline">
-                  Vehicle Updatetion Form
-                </h5>
+                {/* <h5 className="font-monospace fw-bolder mt-5 mb-4 text-decoration-underline">
+                  Update Vehicle Details
+                </h5> */}
+                {this.getTitle()}
               </FormText>
 
               <Form.Group
@@ -236,13 +260,15 @@ class UpdateVehicleDetails extends Component {
                 >
                   Update Details
                 </Button>
-                <Button
-                  type={"submit"}
-                  className="mb-5 mt-5 ms-5 me-2 col-2"
-                  onClick={this.cancel}
-                >
-                  Cancell
-                </Button>
+                <Link to={"/Driver/Profile"} className="mb-5 mt-5 ms-5 me-2 col-2">
+                  <Button
+                    type={"reset"}
+
+                  // onClick={this.cancel}
+                  >
+                    Cancell
+                  </Button>
+                </Link>
               </Form.Group>
             </Form>
           </Card>

@@ -20,7 +20,7 @@ import DriverProfile from "./driver/Dash/DriverProfile";
 import Reservation from "./driver/Dash/Reservation";
 import Request from "./driver/Dash/Request";
 import Ratings from "./driver/Dash/Ratings";
-import VehicleRegistation from "./driver/components/VehicleRegistation";
+// import VehicleRegistation from "./driver/components/VehicleRegistation";
 
 import { Route, Routes } from "react-router-dom";
 import UpdateDDetails from "./driver/components/UpdateDDetails";
@@ -67,7 +67,14 @@ export default function Rout() {
             </ProtectedRoute>
           }
         />
-        <Route path="/Booking" element={<Booking />} />
+        <Route
+          path="/Booking"
+          element={
+            <ProtectedRoute>
+              <Booking />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/updateUserDetails/:userName"
           element={
@@ -112,10 +119,10 @@ export default function Rout() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/Drive/VehicleRegistation"
           element={<VehicleRegistation />}
-        />
+        /> */}
         <Route
           path="/updateDriverDetails/:userName"
           component={

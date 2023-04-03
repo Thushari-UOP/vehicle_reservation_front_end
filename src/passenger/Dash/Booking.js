@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PassengerDashSideBar from "./PassengerDashSideBar";
-import { Col, Row, Card, Container, Form, Button } from "react-bootstrap";
+import { Col, Row, Card, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../../Components/Header";
 import axiosInstance from "../../axios/axios-instance";
 // import VehicleCard from "./VehicleCard";
 // import Map from "../../components/Map";
