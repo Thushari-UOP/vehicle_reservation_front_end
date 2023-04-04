@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import DriverService from "../../Service/DriverService";
 import { Form, FormText, Col, Button, Card } from "react-bootstrap";
-// import Header from '../../Components/Header';
 import { withRouter } from "../../Components/withRouter";
 import axiosInstance from "../../axios/axios-instance";
 import { Link } from "react-router-dom";
-// import { useParams } from 'react-router-dom';
-// import { withRouter } from '../../Components/withRouter';
+import { decodeToken } from "../../utils/utils";
 
 class UpdateVehicleDetails extends Component {
   constructor(props) {
@@ -20,6 +18,7 @@ class UpdateVehicleDetails extends Component {
       maxLength: "",
       maxPassengers: "",
       type: "",
+      fkDriverId: decodeToken().user.driverId,
     };
     this.vehicleNumberHandler = this.vehicleNumberHandler.bind(this);
     this.insuranceNoHandler = this.insuranceNoHandler.bind(this);
@@ -47,14 +46,11 @@ class UpdateVehicleDetails extends Component {
           maxLength: vehicle.maxLength,
           maxPassengers: vehicle.maxPassengers,
           type: vehicle.type,
+          fkDriverId: decodeToken().user.driverId,
         });
       });
   }
 
-
-  // if (this.state.vehicleId === -1) {
-
-  // }
   updateVehicleDetails = (e) => {
     e.preventDefault();
     let vehicleDetails = {
@@ -65,24 +61,50 @@ class UpdateVehicleDetails extends Component {
     };
 
     let vehicle = {
-      vehicleId: this.state.vehicleId,
       vehicleNumber: this.state.vehicleNumber,
       insuranceNo: this.state.insuranceNo,
       maxDays: this.state.maxDays,
       maxLength: this.state.maxLength,
       maxPassengers: this.state.maxPassengers,
       type: this.state.type,
+      fkDriverId: decodeToken().user.driverId,
     }
-    console.log("vehicleUpdateDetails =>" + JSON.stringify(vehicleDetails));
-    console.log("vehicle => " + JSON.stringify(vehicle));
+    
+   
 
-    DriverService.updateVehicleDetails(this.state.vehicleId, vehicleDetails)
+    if(this.state.vehicleId > -1){
+      DriverService.updateVehicleDetails(this.state.vehicleId, vehicleDetails)
       .then(
         (res) => {
           this.props.navigate("/Driver/Profile");
         }
       );
+      console.log("vehicleUpdateDetails =>" + JSON.stringify(vehicleDetails));
+    }else{
+      DriverService.addVehicle(vehicle);
+      console.log("vehicle => " + JSON.stringify(vehicle));
+    }
+
+
   };
+
+
+  getButtonTitle() {
+    if (this.state.vehicleId > -1) {
+      return "Update Details";
+    } else {
+      return "Add Vehicle";
+    }
+  }
+
+  getTitle() {
+    if (this.state.vehicleId > -1) {
+      return <h3 className="text-center">Update Vehicle</h3>
+    } else {
+      return <h3 className="text-center">Add Vehicle</h3>
+    }
+  }
+
 
   vehicleNumberHandler = (event) => {
     this.setState({ vehicleNumber: event.target.value });
@@ -103,29 +125,15 @@ class UpdateVehicleDetails extends Component {
     this.setState({ type: event.target.value });
   };
 
-  // cancel() {
-  //   this.props.navigate("/Driver/Profile");
-  // }
-
-  getTitle() {
-    if (this.state.vehicleId === -1) {
-      return <h3 className="text-center">Add Vehicle</h3>
-    } else {
-      return <h3 className="text-center">Update Vehicle</h3>
-    }
-  }
+ 
 
   render() {
     return (
       <>
-        {/* <Header /> */}
         <div className="mt-5 bg-black">
-          <Card className="mx-auto">
-            <Form className="mx-auto w-75">
-              <FormText>
-                {/* <h5 className="font-monospace fw-bolder mt-5 mb-4 text-decoration-underline">
-                  Update Vehicle Details
-                </h5> */}
+          <Card className="mt-5">
+            <Form className="mx-auto w-75 mt-5">
+              <FormText className="mt-5 ms-5">
                 {this.getTitle()}
               </FormText>
 
@@ -133,7 +141,7 @@ class UpdateVehicleDetails extends Component {
                 as={Col}
                 md="6"
                 controlId="vehicleNo"
-                className="mt-2"
+                className="mt-5"
               >
                 <Form.Label>Vehicle Type</Form.Label>
                 <Form.Control
@@ -258,13 +266,13 @@ class UpdateVehicleDetails extends Component {
                   className="mb-5 mt-5 ms-5 me-5 col-2"
                   onClick={this.updateVehicleDetails}
                 >
-                  Update Details
+                  {this.getButtonTitle()}
                 </Button>
                 <Link to={"/Driver/Profile"} className="mb-5 mt-5 ms-5 me-2 col-2">
                   <Button
                     type={"reset"}
 
-                  // onClick={this.cancel}
+                  onClick={this.cancel}
                   >
                     Cancell
                   </Button>
