@@ -25,6 +25,10 @@ class DriverService {
   updateVehicleDetails(vehicleId,vehicleDetails){
     return axiosInstance.put("http://localhost:8080/api/v1/Vehicle/update/"+vehicleId,vehicleDetails);
   }
+
+  addServiceAreas(vehicleId, serviceAreaId){
+    return axiosInstance.post("http://localhost:8080/api/v1/Vehicle/add-service-areas",vehicleId,serviceAreaId);
+  }
   // getDriver(){
   //     return axios.get(DRIVER_API_FOR_DRIVER_DETAILS);
   // }
