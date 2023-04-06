@@ -8,12 +8,12 @@ import { decodeToken } from "../../utils/utils";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 
 const optionsArray = [
-  { key: 1, label: "Kurunegala" },
-  { key: 2, label: "Colombo" },
-  { key: 3, label: "Jaffna" },
-  { key: 4, label: "Kegall" },
-  { key: 5, label: "Kandy" },
-  { key: 6, label: "Galagedara" },
+  { key: "1", label: "Kurunegala" },
+  { key: "2", label: "Colombo" },
+  { key: "3", label: "Jaffna" },
+  { key: "7", label: "Kegall" },
+  { key: "8", label: "Kandy" },
+  { key: "6", label: "Galagedara" },
 ];
 
 class UpdateVehicleDetails extends Component {
@@ -29,7 +29,7 @@ class UpdateVehicleDetails extends Component {
       maxPassengers: "",
       type: "",
       fkDriverId: decodeToken().user.driverId,
-      // serviceAreaId: []
+      serviceAreaId: []
     };
     this.vehicleNumberHandler = this.vehicleNumberHandler.bind(this);
     this.insuranceNoHandler = this.insuranceNoHandler.bind(this);
@@ -37,30 +37,25 @@ class UpdateVehicleDetails extends Component {
     this.maxLengthHandler = this.maxLengthHandler.bind(this);
     this.maxPassengersHandler = this.maxPassengersHandler.bind(this);
     this.typeHandler = this.typeHandler.bind(this);
-    // this.areaHandler = this.areaHandler.bind(this);
+    this.areaHandler = this.areaHandler.bind(this);
     this.updateVehicleDetails = this.updateVehicleDetails.bind(this);
   }
 
-
   componentDidMount() {
     console.log(this.state);
-    axiosInstance
-      .get(
-        "http://localhost:8080/api/v1/Vehicle/getVehicleById/" + this.state.vehicleId
-      )
-      .then((res) => {
-        let vehicle = res.data;
-        this.setState({
-          vehicleId: vehicle.vehicleId,
-          vehicleNumber: vehicle.vehicleNumber,
-          insuranceNo: vehicle.insuranceNo,
-          maxDays: vehicle.maxDays,
-          maxLength: vehicle.maxLength,
-          maxPassengers: vehicle.maxPassengers,
-          type: vehicle.type,
-          fkDriverId: decodeToken().user.driverId,
-        });
+    DriverService.getVehicleById(this.state.vehicleId).then((res) => {
+      let vehicle = res.data;
+      this.setState({
+        vehicleId: vehicle.vehicleId,
+        vehicleNumber: vehicle.vehicleNumber,
+        insuranceNo: vehicle.insuranceNo,
+        maxDays: vehicle.maxDays,
+        maxLength: vehicle.maxLength,
+        maxPassengers: vehicle.maxPassengers,
+        type: vehicle.type,
+        fkDriverId: decodeToken().user.driverId,
       });
+    });
   }
 
   updateVehicleDetails = (e) => {
@@ -80,26 +75,21 @@ class UpdateVehicleDetails extends Component {
       maxPassengers: this.state.maxPassengers,
       type: this.state.type,
       fkDriverId: decodeToken().user.driverId,
+      serviceAreas: this.state.serviceAreaId
     }
-
-
 
     if (this.state.vehicleId > -1) {
       DriverService.updateVehicleDetails(this.state.vehicleId, vehicleDetails)
-        .then(
-          (res) => {
-            this.props.navigate("/Driver/Profile");
-          }
-        );
+      .then((res) => {
+        this.props.navigate("/Driver/Profile");
+      });
       console.log("vehicleUpdateDetails =>" + JSON.stringify(vehicleDetails));
-    } else {
-      DriverService.addVehicle(vehicle);
-      console.log("vehicle => " + JSON.stringify(vehicle));
-      // console.log("areas : " + JSON.stringify(this.state.serviceAreaId));
-      // DriverService.addServiceAreas(this.state.vehicleId,this.state.serviceAreaId);
-    }
 
-    
+    } else {
+      console.log(this.state);
+      console.log(vehicle);
+      DriverService.addVehicle(vehicle);
+    }
   };
 
 
@@ -138,9 +128,10 @@ class UpdateVehicleDetails extends Component {
   typeHandler = (event) => {
     this.setState({ type: event.target.value });
   };
-//  areaHandler = (event) => {
-//     this.setState({ serviceAreaId: event.target.value });
-//   } 
+  areaHandler = (event) => {
+    this.setState({ serviceAreaId: event });
+    console.log(event);
+  }
 
 
   render() {
@@ -260,11 +251,9 @@ class UpdateVehicleDetails extends Component {
                 className="mt-3"
               >
                 <Form.Label>Service Areas</Form.Label>
-                {/* <Form.Select required  aria-label="Floating label select example" size="sm">
-                </Form.Select> */}
                 <DropdownMultiselect
-                  // value={optionsArray.keys()}
-                  // onClick={this.areaHandler}
+                  value={optionsArray.keys()}
+                  handleOnChange={(e) => this.areaHandler(e)}
                   options={optionsArray}
                   name="area"
                 />
@@ -279,7 +268,7 @@ class UpdateVehicleDetails extends Component {
 
               <Form.Group className="row">
                 <Button
-                  type={"submit"}
+                  type={"button"}
                   className="mb-5 mt-5 ms-5 me-5 col-2"
                   onClick={this.updateVehicleDetails}
                 >
@@ -287,7 +276,7 @@ class UpdateVehicleDetails extends Component {
                 </Button>
                 <Link to={"/Driver/Profile"} className="mb-5 mt-5 ms-5 me-2 col-2">
                   <Button
-                    type={"reset"}
+                    type={"button"}
 
                     onClick={this.cancel}
                   >
