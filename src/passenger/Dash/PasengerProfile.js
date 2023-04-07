@@ -59,9 +59,6 @@ export default function Profile() {
                     User Name : {passenger.userName}{" "}
                   </li>
                   <li className="list-group-item col-12 mb-3">
-                    Password : {passenger.password}{" "}
-                  </li>
-                  <li className="list-group-item col-12 mb-3">
                     E-mail : {passenger.email}{" "}
                   </li>
                   <li className="list-group-item col-12 mb-3">

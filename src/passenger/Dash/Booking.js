@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PassengerDashSideBar from "./PassengerDashSideBar";
 import { Col, Row, Card, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -7,58 +7,30 @@ import axiosInstance from "../../axios/axios-instance";
 // import Map from "../../components/Map";
 export default function Booking() {
   const vehicle = ["CAR", "VAN", "BUS"];
-  const towns = [
-    "Colombo",
-    "Kurunegala",
-    "Kandy",
-    "Badulla",
-    "Matara",
-    "Puttalam",
-    "Thenmarachchi",
-    "Kattankudy",
-    "Matale",
-    "Kalutara",
-    "Mannar",
-    "Panadura",
-    "Beruwela",
-    "Ja-Ela",
-    "Vadamarachi-North",
-    "Kelaniya",
-    "Wattala",
-    "Gampola",
-    "Nuwara-Eliya",
-    "Chilaw",
-    "Eravur",
-    "Hanwella",
-    "Weligama",
-    "Ambalangoda",
-    "Ampara",
-    "Kegalle",
-    "Ambagamuwa",
-    "Balangoda",
-    "Hambanthota",
-    "Tangalle",
-    "Moneragala",
-    "Horana",
-    "Siyabalanduwa",
-    "Minuwangoda",
-    "Badarawela",
-    "Haputale",
-  ];
-
-  const SelectVehicle = vehicle.map((vehicle) => <option>{vehicle}</option>);
-
-  const selectNearestTowns = towns.map((towns) => <option>{towns}</option>);
 
   const [type, setType] = useState("");
   const [passangers, setPassangers] = useState("");
   const [date, setDate] = useState("");
   const [town, setTown] = useState("");
-
   const [dates, setDates] = useState("");
 
+  const [areas, setAreas] = useState([]);
+
+  useEffect(() => {
+    console.log("areas");
+    loadAreas();
+  }, []);
+
+  const loadAreas = async () => {
+    axiosInstance
+      .get(`http://localhost:8080/api/v1/ServiceArea/getAll`)
+      .then((r) => {
+        setAreas(r.data);
+      });
+  };
+
   const submit = () => {
-    console.log(type, passangers, date, town);
+    console.log(type, passangers, date, town , dates);
     axiosInstance
       .get(
         `http://localhost:8080/api/v1/Vehicle/search?type=${type}&passengers=${passangers}&date=${date}&town=${town}&dates=${dates}`
@@ -67,6 +39,10 @@ export default function Booking() {
         console.log(r);
       });
   };
+
+  const SelectVehicle = vehicle.map((vehicle) => <option>{vehicle}</option>);
+
+  const selectAreas = areas.map((areas) => <option>{areas.name}</option>);
 
   return (
     <div>
@@ -105,7 +81,7 @@ export default function Booking() {
                   <Col>
                     <Form.Group controlId="reservationForm.noOfPassengers">
                       <Form.Label className="mb-2 mx-1 mt-5">
-                        No. Of Passengers
+                        Number Of Passengers
                       </Form.Label>
                       <Form.Control
                         onChange={(event) => setPassangers(event.target.value)}
@@ -149,13 +125,13 @@ export default function Booking() {
                       className="mb-xl-5"
                     >
                       <Form.Label className="mb-2 mx-1">
-                        Nearest Towns
+                        Searching area
                       </Form.Label>
                       <Form.Select
                         onChange={(event) => setTown(event.target.value)}
                         className=""
                       >
-                        {selectNearestTowns}
+                        {selectAreas}
                       </Form.Select>
                     </Form.Group>
                   </Col>
@@ -186,7 +162,8 @@ export default function Booking() {
                 <Card.Body>
                   <Card.Title className="text-center">Available</Card.Title>
                   <Card.Text className="sm font fst-italic">
-                    Before Your Booking Please Contact Driver And Make Comfermation
+                    Before Your Booking Please Contact Driver And Make
+                    Comfermation
                   </Card.Text>
                   <ul>Vehicle Type</ul>
                   <ul>Vehicle Number</ul>
@@ -206,7 +183,8 @@ export default function Booking() {
                 <Card.Body>
                   <Card.Title className="text-center">Available</Card.Title>
                   <Card.Text className="sm font fst-italic">
-                  Before Your Booking Please Contact Driver And Make Comfermation
+                    Before Your Booking Please Contact Driver And Make
+                    Comfermation
                   </Card.Text>
                   <ul>Vehicle Type</ul>
                   <ul>Vehicle Number</ul>

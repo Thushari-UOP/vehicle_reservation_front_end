@@ -13,7 +13,7 @@ import DriveRegistation from "./driver/DriveRegistation";
 
 import Hist from "./passenger/Dash/Histry";
 import Booking from "./passenger/Dash/Booking";
-import Profile from "./passenger/Dash/Profile";
+import Profile from "./passenger/Dash/PasengerProfile";
 
 import DriverProfile from "./driver/Dash/DriverProfile";
 // import DriverCallender from "./driver/Dash/DriveCalander";
