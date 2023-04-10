@@ -11,9 +11,11 @@ const optionsArray = [
   { key: "1", label: "Kurunegala" },
   { key: "2", label: "Colombo" },
   { key: "3", label: "Jaffna" },
+  { key: "4", label: "Gall"},
+  { key: "5", label: "Wariyapola"},
+  { key: "6", label: "Galagedara" },
   { key: "7", label: "Kegall" },
   { key: "8", label: "Kandy" },
-  { key: "6", label: "Galagedara" },
 ];
 
 class UpdateVehicleDetails extends Component {
@@ -147,7 +149,7 @@ class UpdateVehicleDetails extends Component {
               <Form.Group
                 as={Col}
                 md="6"
-                controlId="vehicleNo"
+                controlId="type"
                 className="mt-5"
               >
                 <Form.Label>Vehicle Type</Form.Label>
@@ -166,7 +168,7 @@ class UpdateVehicleDetails extends Component {
               <Form.Group
                 as={Col}
                 md="6"
-                controlId="vehicleNo"
+                controlId="vehicleNumber"
                 className="mt-2"
               >
                 <Form.Label>Vehicle Number</Form.Label>
