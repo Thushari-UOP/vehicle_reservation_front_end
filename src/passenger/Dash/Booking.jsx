@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PassengerDashSideBar from "./PassengerDashSideBar";
 import { Col, Row, Card, Form, Button, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { decodeToken } from "../../utils/utils";
 import axiosInstance from "../../axios/axios-instance";
 
 export default function Booking() {
+
   const vehicle = ["CAR", "VAN", "BUS"];
 
   const [type, setType] = useState("");
@@ -14,17 +15,33 @@ export default function Booking() {
   const [dates, setDates] = useState("");
 
   const [areas, setAreas] = useState([]);
-
   const [sVehicles, setSVehicles] = useState("");
-
   const [driver, setDriver] = useState({});
+  const [vNo, setVehicleNo] = useState("");
 
-  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+
+  const [vId, setVehId] = useState("");
+  const [date2, setDate2] = useState("");
+  const [days2, setDays2] = useState("");
+  const [passangers2, setPassangers2] = useState();
+  const [pickup, setPickup] = useState("");
+  const [drop, setDrop] = useState("");
+
+  const [error, setError] = useState("");
 
   useEffect(() => {
     loadAreas();
   }, []);
 
+  // const searchVelidate = () => {
+  //   if (passangers < 1) {
+  //     setError("insert value must be positive");
+  //   } else {
+  //     setError("");
+  //   }
+  // };
 
   const loadAreas = async () => {
     await axiosInstance
@@ -35,7 +52,7 @@ export default function Booking() {
       });
   };
 
-  const submit = async () => {
+  const search = async () => {
     console.log(type, passangers, date, dates, town);
     await axiosInstance
       .get(
@@ -58,10 +75,27 @@ export default function Booking() {
       });
   }
 
-  const bookVehicle = async() =>{
+  const bookVehicle = async () => {
     console.log("make reservation");
-  }
+    const reqBody = {
+      date: date2,
+      days: days2,
+      passengers: passangers2,
+      dropLocation: pickup,
+      pickupLocation: drop,
+      fkPassengerId: decodeToken().user.passengerId,
+      fkVehicleId: vId
+    };
+    console.log(reqBody);
+    axiosInstance.post(`http://localhost:8080/api/v1/Reservation/create`, reqBody)
+      .then((r) => {
+        console.log(r);
+        if (r?.data === true) {
+          alert("Your Booking is compleate");
+        }
+      });
 
+  }
 
   const SelectVehicle = vehicle.map((vehicle) => (
     <option key={vehicle}>{vehicle}</option>
@@ -73,172 +107,164 @@ export default function Booking() {
     </option>
   ));
 
-
   return (
     <div>
-      <div className="me-5 mt-5 row">
+      <div className="mt-5 row">
+
         <Col style={{ marginLeft: "-12px", display: "contents" }}>
           <PassengerDashSideBar />
         </Col>
-        <Col className="col-6">
-          <Card className="mt-5 ms-5 border-opacity-50 mb-5">
-            <Card.Header
-              as="h5"
-              className="text-center text-white-50 fw-bold"
-              style={{ backgroundColor: "darkslateblue" }}
-            >
+
+        <Col className="col-10">
+          <Card className="mt-5 ms-5 border-opacity-50 mb-5 w-50">
+            <Card.Header as="h5" className="text-center text-white-50 fw-bold" style={{ backgroundColor: "darkslateblue" }}>
               Search Vehicles
             </Card.Header>
-            <Card.Body
-              className="ms-3 me-3 mb-3"
-              style={{ background: "#bfb8de", color: "darkslateblue" }}
-            >
+            <Card.Body className="ms-3 me-3 mb-3" style={{ background: "#bfb8de", color: "darkslateblue" }} >
               <Form className="container">
                 <Row>
                   <Col>
                     <Form.Group controlId="reservationForm.vehicleType">
-                      <Form.Label className="mb-2 mx-1 mt-5">
-                        Vehicle Type
-                      </Form.Label>
-                      <Form.Select
-                        className="mb-4"
-                        onChange={(event) => setType(event.target.value)}
-                      >
+                      <Form.Label className="mb-2 mx-1 mt-5"> Vehicle Type </Form.Label>
+                      <Form.Select className="mb-4" onChange={(event) => setType(event.target.value)}>
                         {SelectVehicle}
                       </Form.Select>
                     </Form.Group>
                   </Col>
                   <Col>
                     <Form.Group controlId="reservationForm.noOfPassengers">
-                      <Form.Label className="mb-2 mx-1 mt-5">
-                        Number Of Passengers
-                      </Form.Label>
-                      <Form.Control
-                        onChange={(event) => setPassangers(event.target.value)}
-                        type="number"
-                        className="mb-4"
-                      />
+                      <Form.Label className="mb-2 mx-1 mt-5">Number Of Passengers</Form.Label>
+                      <Form.Control value={passangers} onChange={(event) => setPassangers(event.target.value)} type="number" className="mb-4"
+                        onBlur={() => {
+                          if (passangers < 1) {
+                            setError("insert value must be positive");
+                          } else {
+                            setError("");
+                          }
+                        }} />
+                      {error && <div style={{ color: "red" }}>{error}</div>}
                     </Form.Group>
                   </Col>
                 </Row>
-
                 <Row>
                   <Col>
                     <Form.Group controlId="reservationForm.date">
                       <Form.Label className="mb-2 mx-1">Date</Form.Label>
-                      <Form.Control
-                        onChange={(event) => setDate(event.target.value)}
-                        type="date"
-                        className="mb-4"
-                      />
+                      <Form.Control onChange={(event) => setDate(event.target.value)} type="date" className="mb-4" />
                     </Form.Group>
                   </Col>
                   <Col>
                     <Form.Group controlId="reservationForm.noOfDays">
-                      <Form.Label className="mb-2 mx-1">
-                        For how many days?
-                      </Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="Maximum is 4"
-                        onChange={(event) => setDates(event.target.value)}
-                        className="mb-4"
-                      />
+                      <Form.Label className="mb-2 mx-1"> For how many days? </Form.Label>
+                      <Form.Control type="number" placeholder="Maximum is 4" onChange={(event) => setDates(event.target.value)} className="mb-4" />
                     </Form.Group>
                   </Col>
                 </Row>
-
                 <Row>
                   <Col>
-                    <Form.Group
-                      controlId="reservationForm.area"
-                      className="mb-xl-5"
-                    >
-                      <Form.Label className="mb-2 mx-1">
-                        Searching area
-                      </Form.Label>
-                      <Form.Select
-                        onChange={(event) => setTown(event.target.value)}
-                        className=""
-                      >
+                    <Form.Group controlId="reservationForm.area" className="mb-xl-5">
+                      <Form.Label className="mb-2 mx-1">Searching area </Form.Label>
+                      <Form.Select onChange={(event) => setTown(event.target.value)}>
                         {selectAreas}
                       </Form.Select>
                     </Form.Group>
                   </Col>
                 </Row>
-                {/* <Row>
-                    <Map/>
-                  </Row> */}
 
-                <Link className="mx-auto mb-4">
-                  <Button
-                    type="button"
-                    className="text-center text-black"
-                    onClick={submit}
-                    variant="outline-secondary"
-                  >
-                    Search Vehicle
-                  </Button>
-                </Link>
+                {/* <Row> <Map/> </Row> */}
+
+                <Button type="button" className="text-center  text-black" onClick={search} variant="outline-secondary">
+                  Search
+                </Button>
+
               </Form>
             </Card.Body>
           </Card>
 
-          {/* search vehicle display */}
+          {/* search vehicles display */}
 
-          <div className="d-flex ms-3">
-            <div className="mt-2 mb-3 d-flex">
 
-              {sVehicles.length > 0 ? (
+          <div className="mt-2 mb-5">
 
-                <div className="mt-2 mb-3 d-flex">
-                  <h4>Matching Vehicles</h4>
+            {sVehicles.length > 0 ? (
+              <div>
+                <h4 className="mb-4 ms-2 text-monospace">Matching Vehicles</h4>
+                <div className="mt-2 mb-3 ms-2 d-flex w-100">
 
                   {sVehicles.map((sVehicles) =>
-                    <Card style={{ width: "18rem" }} className="shadow ms-2 me-3" key={sVehicles.vehicleId} >
+                    <Card className="shadow col-3 mx-auto" key={sVehicles.vehicleId}>
                       <Card.Img variant="top" src="holder.js/100px180" />
                       <Card.Body>
                         <Card.Title className="text-center">Available</Card.Title>
-                        <Card.Text className="sm font fst-italic">
-                          Before Your Booking Please Contact Driver And Make comfermation
-                        </Card.Text>
+                        <Card.Text className="sm font fst-italic"> Before Your Booking Please Contact Driver And Make comfermation </Card.Text>
                         <p>Vehicle Type : {sVehicles.type}</p>
                         <p>Vehicle Number : {sVehicles.vehicleNumber}</p>
                         <p>Maximum Length : {sVehicles.maxLength}km</p>
                         <p>Maximum Passengers : {sVehicles.maxPassengers}</p>
                         <p>Maximum Days : {sVehicles.maxDays} days</p>
-
                         {/* driver details display as alert. alert in bellow */}
-                        {!show && <Button onClick={() => { setShow(true); getDriverDetails(sVehicles.vehicleId) }}>Driver Details</Button>}
-
+                        {!show1 && <Button variant="outline-success" size="sm" className="ms-1" onClick={() => { setShow1(true); getDriverDetails(sVehicles.vehicleId); setVehId(sVehicles.vehicleId); setVehicleNo(sVehicles.vehicleNumber) }}>Driver Details</Button>}
                       </Card.Body>
                     </Card>
                   )}
                 </div>
-
-              ) : (
-                <p>No Matching Vehicles</p>
-
-              )}
-            </div>
+              </div>
+            ) : (
+              <p>There Is No Matching Vehicles</p>
+            )}
           </div>
-          <div >
-            <Alert show={show} variant="success" >
+
+
+          <div className="row w-100 ms-3">
+            <Alert show={show1} variant="success" className="col-5 me-3">
               <h5 >Selected Driver Details</h5>
               <hr />
-              <p >Name : {driver.firstName} {driver.lastName}</p>
+              <p>Vehicle Number : {vNo} </p>
+              <p>Name : {driver.firstName} {driver.lastName}</p>
               <p>Telephone Number : {driver.telephone}</p>
               <p>E-mail : {driver.email}</p>
               <p>Date of Birt : {driver.dob}</p>
               <hr />
               <div className="d-flex justify-content-end">
-                <Button onClick={() => setShow(false)} variant="outline-success" className="me-5">
-                  Back
-                </Button>
-                <Button variant="outline-success" className="me-5" onClick={bookVehicle}>
-                  Book
-                </Button>
+                <Button onClick={() => { setShow1(false); setShow2(false) }} variant="outline-success" className="me-5">Back</Button>
+                {!show2 && <Button variant="outline-success" className="me-5" onClick={() => { setShow2(true) }}>Make Reservation</Button>}
               </div>
+            </Alert>
+
+            <Alert show={show2} variant="success" className="col-6 ms-4">
+              <h5 >Reservation Details</h5>
+              <hr />
+              <Form className="w-75 mx-auto">
+                <Form.Group controlId="date2">
+                  <Form.Label className="mb-2 mx-1 mt-2">Date</Form.Label>
+                  <Form.Control value={date2} required onChange={(event) => setDate2(event.target.value)} name="date2" type="date" className="mb-4" />
+                </Form.Group>
+
+                <Form.Group controlId="days2">
+                  <Form.Label className="mb-2 mx-1 mt-2">Number Of Days</Form.Label>
+                  <Form.Control value={days2} required onChange={(event) => setDays2(event.target.value)} name="days2" type="number" className="mb-4" />
+                </Form.Group>
+
+                <Form.Group controlId="passengers2">
+                  <Form.Label className="mb-2 mx-1 mt-2">Number Of Passengers</Form.Label>
+                  <Form.Control required onChange={(event) => setPassangers2(event.target.value)} name="passengers2" type="number" className="mb-4" />
+                </Form.Group>
+
+                <Form.Group controlId="pickup">
+                  <Form.Label className="mb-2 mx-1 mt-2">Pickup Location</Form.Label>
+                  <Form.Control placeholder="pickup location name" onChange={(event) => setPickup(event.target.value)} name="pickup" type="text" className="mb-4" />
+                </Form.Group>
+
+                <Form.Group controlId="drop" required>
+                  <Form.Label className="mb-2 mx-1 mt-2">Drop Location</Form.Label>
+                  <Form.Control placeholder="drop location name" onChange={(event) => setDrop(event.target.value)} name="drop" type="text" className="mb-4" />
+                </Form.Group>
+                <hr />
+                <div className="d-flex justify-content-end">
+                  <Button onClick={() => setShow2(false)} variant="outline-success" className="me-5">Back</Button>
+                  {<Button variant="outline-success" className="me-5" onClick={() => { bookVehicle() }}>Book</Button>}
+                </div>
+              </Form>
             </Alert>
           </div>
         </Col>
