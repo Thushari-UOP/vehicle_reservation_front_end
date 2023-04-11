@@ -73,12 +73,12 @@ export default function Header() {
                 </Link>
               </li>
               <li className="nav-item p-3">
-                <Link to="/Passenger" style={heading_style}>
+                <Link to="/passenger" style={heading_style}>
                   Ride
                 </Link>
               </li>
               <li className="nav-item p-3">
-                <Link to="/Drive" style={heading_style}>
+                <Link to="/drive" style={heading_style}>
                   Drive
                 </Link>
               </li>
@@ -86,7 +86,7 @@ export default function Header() {
 
             <ul className="navbar-nav ms-auto">
               <li className="nav-item p-3 pe-5">
-                <Link to="/About" style={heading_style}>
+                <Link to="/about" style={heading_style}>
                   About Us
                 </Link>
               </li>

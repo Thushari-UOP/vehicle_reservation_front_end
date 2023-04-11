@@ -46,9 +46,14 @@ class DriveRegistation extends Component {
     console.log("driver =>" + JSON.stringify(driver));
 
     axios
-      .post("http://localhost:8080/api/v2/open/addDriver", driver)
+      .post("http://localhost:8080/api/v2/open/add-driver", driver)
       .then((r) => {
         console.log(r);
+        if(r.data === true){
+          alert("Registation is succesfull");
+          const { navigate } = this.props;
+          navigate('/drive/sign-in');
+        }
       })
       .catch((e) => {
         console.error(e);
@@ -56,7 +61,8 @@ class DriveRegistation extends Component {
   };
   
   cancel() {
-    this.props.navigate("/Drive");
+    const { navigate } = this.props;
+    navigate('/drive');
   }
 
   changeUserName = (event) => {

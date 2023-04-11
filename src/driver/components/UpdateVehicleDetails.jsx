@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import DriverService from "../../Service/DriverService";
 import { Form, FormText, Col, Button, Card } from "react-bootstrap";
 import { withRouter } from "../../Components/withRouter";
-import axiosInstance from "../../axios/axios-instance";
-import { Link } from "react-router-dom";
 import { decodeToken } from "../../utils/utils";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
+import { Link } from "react-router-dom";
 
 const optionsArray = [
   { key: "1", label: "Kurunegala" },
@@ -83,7 +82,8 @@ class UpdateVehicleDetails extends Component {
     if (this.state.vehicleId > -1) {
       DriverService.updateVehicleDetails(this.state.vehicleId, vehicleDetails)
       .then((res) => {
-        this.props.navigate("/Driver/Profile");
+        const { navigate } = this.props;
+        navigate('/driver/profile');
       });
       console.log("vehicleUpdateDetails =>" + JSON.stringify(vehicleDetails));
 
@@ -276,11 +276,9 @@ class UpdateVehicleDetails extends Component {
                 >
                   {this.getButtonTitle()}
                 </Button>
-                <Link to={"/Driver/Profile"} className="mb-5 mt-5 ms-5 me-2 col-2">
+                <Link to={"/driver/profile"} className="mb-5 mt-5 ms-5 me-2 col-2">
                   <Button
                     type={"button"}
-
-                    onClick={this.cancel}
                   >
                     Cancell
                   </Button>

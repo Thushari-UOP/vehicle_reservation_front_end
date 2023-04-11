@@ -20,7 +20,6 @@ import DriverProfile from "./driver/Dash/DriverProfile";
 import Reservation from "./driver/Dash/Reservation";
 import Request from "./driver/Dash/Request";
 import Ratings from "./driver/Dash/Ratings";
-// import VehicleRegistation from "./driver/components/VehicleRegistation";
 
 import { Route, Routes } from "react-router-dom";
 import UpdateDDetails from "./driver/components/UpdateDDetails";
@@ -35,19 +34,19 @@ export default function Rout() {
       <Routes>
         {/* Pages */}
         <Route path="/" element={<Home />} />
-        <Route path="/Passenger" element={<Passenger />} />
-        <Route path="/Drive" element={<Drive />} />
-        <Route path="/About" element={<About />} />
+        <Route path="/passenger" element={<Passenger />} />
+        <Route path="/drive" element={<Drive />} />
+        <Route path="/about" element={<About />} />
         {/* <Route path="/Contact" element={<Contact />} /> */}
 
         {/* Button SingIn & Registation */}
-        <Route path="/Passenger/SignIn" element={<SignInToRide />} />
-        <Route path="/Drive/SignIn" element={<SignInToDrive />} />
+        <Route path="/passenger/sign-in" element={<SignInToRide />} />
+        <Route path="/drive/sign-in" element={<SignInToDrive />} />
         <Route
-          path="/Passenger/Registation"
+          path="/passenger/registation"
           element={<PassengerRegistation />}
         />
-        <Route path="/Driver/Registation" element={<DriveRegistation />} />
+        <Route path="/driver/registation" element={<DriveRegistation />} />
 
         {/* Passenger Dashbords */}
         <Route
@@ -60,7 +59,7 @@ export default function Rout() {
         />
 
         <Route
-          path="/Passenger/Profile"
+          path="/passenger/profile"
           element={
             <ProtectedRoute>
               <Profile />
@@ -68,7 +67,7 @@ export default function Rout() {
           }
         />
         <Route
-          path="/Booking"
+          path="/booking"
           element={
             <ProtectedRoute>
               <Booking />

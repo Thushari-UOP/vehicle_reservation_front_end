@@ -3,14 +3,10 @@ import imag1 from "../Images/ReserveVehi.jpg";
 import imag2 from "../Images/Driver3.png";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../Components/Header";
-
-// const Home_Url = "http://localhost:8080/api/v2/";
 
 export default function Home() {
   return (
     <div className="pt-5">
-      <Header />
       <section
         className="row"
         style={{
@@ -41,7 +37,7 @@ export default function Home() {
           </h2>
 
           <div className="m-5 ps-5">
-            <Link to="/Passenger/SignIn">
+            <Link to="/passenger/sign-in">
               <Button
                 variant="outline-dark"
                 className="m-4 ms-5 justify-content-end"
@@ -49,7 +45,7 @@ export default function Home() {
                 Sign In
               </Button>
             </Link>
-            <Link to="/Passenger/Registation">
+            <Link to="/passenger/registation">
               <Button variant="outline-dark" className="ms-5">
                 Sign Up
               </Button>
@@ -99,7 +95,7 @@ export default function Home() {
           </h2>
 
           <div className="m-5 ps-5">
-            <Link to="/Drive/SignIn">
+            <Link to="/drive/sign-in">
               <Button
                 variant="outline-dark"
                 className="m-4 ms-5 justify-content-end"
@@ -107,7 +103,7 @@ export default function Home() {
                 Sign In
               </Button>
             </Link>
-            <Link to="/Driver/Registation">
+            <Link to="/driver/registation">
               <Button variant="outline-dark" className="ms-5">
                 Sign Up
               </Button>

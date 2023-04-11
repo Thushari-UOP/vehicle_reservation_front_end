@@ -1,26 +1,30 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Card, Form, Button, FormText } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 
 export default function SignIn() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
+
   const signInSubmit = () => {
+
+    const reqBody = {
+      email: userName,
+      password: password,
+    }
     axios
-      .post("http://localhost:8080/api/v2/open/driver/login", {
-        email: userName,
-        password: password,
-      })
+      .post("http://localhost:8080/api/v2/open/driver/login", reqBody)
       .then((r) => {
         console.log(r);
         if (r?.data?.success === true) {
           localStorage.setItem("token", r?.data?.response?.token);
-          alert("Login Success");
-          // /Passenger/Profile
-          navigate("/Driver/Profile");
+          navigate("/driver/profile");
+        }else {
+          alert("Your given email or password is wrong");
         }
       })
       .catch((e) => {

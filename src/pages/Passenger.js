@@ -1,14 +1,10 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../Components/Header";
 
 function Passenger() {
   return (
     <div>
-      <Header  />
-      {/* BreadCrumb and Sign In, Sign Up */}
-
       <div
         className="p-5 align-items-md-center"
         style={{
@@ -24,20 +20,20 @@ function Passenger() {
         }}
       >
         <div className="row p-4">
-          <Link to="/Passenger/SignIn">
+          <Link to="/passenger/sign-in">
             <Button variant="outline-dark" className="m-5 justify-content-end">
               Sign In
             </Button>
           </Link>
 
-          <Link to="/Passenger/Registation">
+          <Link to="/passenger/registation">
             <Button variant="outline-dark" className="m-5 justify-content-end">
               Sign Up
             </Button>
           </Link>
         </div>
         
-        <Link to="/Booking" >
+        <Link to="/booking" >
           <Button
             variant="outline-dark"
             className="mt-5 mx-5 border-0"
