@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import imag from "../Images/Car.png";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Form, Button, FloatingLabel } from "react-bootstrap";
-
+import {Form, Button, FloatingLabel } from "react-bootstrap";
+import emailjs from '@emailjs/browser';
 
 export default function Header() {
-
   // const DropdownComponent = props => (
   //   <div className="form-group col-md-6">
   //       <label>{props.labelName} :</label>
@@ -26,12 +25,26 @@ export default function Header() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const form = useRef();
+ 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_v9dbltn','template_murhz1h', form.current, 'DLOKdBHqeS90f3hHH')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
+
   const heading_style = {
     color: "#1a0d27",
     fontWeight: "bold",
     fontFamily: "initial",
     textUnderlinePosition: "under",
   };
+
 
   return (
     <div>
@@ -116,13 +129,15 @@ export default function Header() {
             If you need any helps or If you like to share your idears please
             contact us
           </p>
-          <Form className="container">
+          <Form className="container" ref={form} onSubmit={sendEmail}>
             <Form.Group
               className="mb-4 mx-4 align-content-center"
               controlId="formBasicEmail"
             >
-              <Form.Label className="text-center fw-semibold">Email address</Form.Label>
-              <Form.Control type="email" placeholder="example@gmail.com" />
+              <Form.Label className="text-center fw-semibold">
+                Email address
+              </Form.Label>
+              <Form.Control type="email" name="user_email" placeholder="example@gmail.com" />
               <Form.Text className="text-muted fst-italic fw-lighter">
                 We'll never share your email with anyone else.
               </Form.Text>
@@ -132,8 +147,10 @@ export default function Header() {
               className="mb-4 mx-4 align-content-center"
               controlId="ContactUsSubject"
             >
-              <Form.Label className="text-center fw-semibold">Subject</Form.Label>
-              <Form.Control type="text" placeholder="" />
+              <Form.Label className="text-center fw-semibold">
+                Subject
+              </Form.Label>
+              <Form.Control placeholder="" type="text" name="user_subject" />
 
               <FloatingLabel
                 controlId="floatingTextarea"
@@ -143,6 +160,7 @@ export default function Header() {
                 <Form.Control
                   as="textarea"
                   placeholder="Leave a comment here"
+                  name="message"
                 />
               </FloatingLabel>
             </Form.Group>
@@ -153,7 +171,14 @@ export default function Header() {
               <Form.Check type="checkbox" label="Send copy to me" />
             </Form.Group>
 
-            <Button variant="outline-primary" type="submit" className="mb-2 col-5" style={{marginLeft:"30%"}}>
+            <Button
+              variant="outline-primary"
+              className="mb-2 col-5"
+              style={{ marginLeft: "30%" }}
+              onClick={sendEmail}
+              type="submit" 
+              value="Send" 
+            >
               Send
             </Button>
           </Form>
