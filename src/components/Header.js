@@ -164,12 +164,6 @@ export default function Header() {
                 />
               </FloatingLabel>
             </Form.Group>
-            <Form.Group
-              className="mb-3 mx-5 align-content-center"
-              controlId="ContactUsCeckbox"
-            >
-              <Form.Check type="checkbox" label="Send copy to me" />
-            </Form.Group>
 
             <Button
               variant="outline-primary"

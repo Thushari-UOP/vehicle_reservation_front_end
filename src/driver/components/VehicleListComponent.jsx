@@ -45,7 +45,7 @@ class VehicleListComponent extends Component {
       <div className="row">
         <table className="table table-striped table-hover table-bordered">
           <thead>
-            <tr>
+            <tr className="fw-bold">
               <th>Id</th>
               <th>Number</th>
               <th>Ins_No</th>
@@ -85,8 +85,8 @@ class VehicleListComponent extends Component {
           </tbody>
         </table>
         <Button
-          variant="outline-light"
-          className="btn shadow-sm col-3 mt-3 mb-2"
+          variant="outline-secondary"
+          className="shadow-sm text-dark ms-3 col-3 mt-3 mb-2"
           onClick={this.addVehicle}
         >
           Add Vehicle

@@ -65,7 +65,7 @@ export default function Home() {
           className="row-cols-6 float-end"
           src={imag2}
           alt=""
-          style={{ height: "610px" }}
+          style={{ height: "553px" }}
         />
 
         <div className="">

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PassengerDashSideBar from "./PassengerDashSideBar";
 import { Col, Row, Card, Container } from "react-bootstrap";
 import Header from "../../Components/Header";
-import axios from "axios";
 import axiosInstance from "../../axios/axios-instance";
 import { decodeToken } from "../../utils/utils";
 
