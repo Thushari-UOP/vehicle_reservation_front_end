@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DriverService from "../../Service/DriverService";
-import { Form, FormText, Col, Button, Card } from "react-bootstrap";
+import { Form, FormText, Col, Button, Card} from "react-bootstrap";
 import { withRouter } from "../../Components/withRouter";
 import { decodeToken } from "../../utils/utils";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
@@ -32,6 +32,7 @@ class UpdateVehicleDetails extends Component {
       fkDriverId: decodeToken().user.driverId,
       serviceAreaId: []
     };
+
     this.vehicleNumberHandler = this.vehicleNumberHandler.bind(this);
     this.insuranceNoHandler = this.insuranceNoHandler.bind(this);
     this.maxDaysHandler = this.maxDaysHandler.bind(this);
@@ -78,19 +79,25 @@ class UpdateVehicleDetails extends Component {
       fkDriverId: decodeToken().user.driverId,
       serviceAreas: this.state.serviceAreaId
     }
-
+    
     if (this.state.vehicleId > -1) {
       DriverService.updateVehicleDetails(this.state.vehicleId, vehicleDetails)
-      .then((res) => {
+      .then(() => {
         const { navigate } = this.props;
         navigate('/driver/profile');
       });
       console.log("vehicleUpdateDetails =>" + JSON.stringify(vehicleDetails));
-
     } else {
       console.log(this.state);
       console.log(vehicle);
-      DriverService.addVehicle(vehicle);
+      DriverService.addVehicle(vehicle)
+      .then((res) => {
+        if(res?.data === true){
+          alert("Vehicle Registation is compleate");
+          const { navigate } = this.props;
+          navigate('/driver/profile');
+        }
+      });
     }
   };
 
@@ -136,7 +143,11 @@ class UpdateVehicleDetails extends Component {
   }
 
 
-  render() {
+  render(
+
+
+
+  ) {
     return (
       <>
         <div className="mt-5 bg-black">

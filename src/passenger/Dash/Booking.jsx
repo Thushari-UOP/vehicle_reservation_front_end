@@ -35,14 +35,6 @@ export default function Booking() {
     loadAreas();
   }, []);
 
-  // const searchVelidate = () => {
-  //   if (passangers < 1) {
-  //     setError("insert value must be positive");
-  //   } else {
-  //     setError("");
-  //   }
-  // };
-
   const loadAreas = async () => {
     await axiosInstance
       .get(`http://localhost:8080/api/v1/service-area/get-all`)
@@ -53,7 +45,7 @@ export default function Booking() {
   };
 
   const search = async () => {
-    console.log(type, passangers, date, dates, town);
+    console.log("search details " + type, passangers, date, dates, town);
     await axiosInstance
       .get(
         `http://localhost:8080/api/v1/Vehicle/search?type=${type}&passengers=${passangers}&date=${date}&dates=${dates}&town=${town}`
@@ -87,12 +79,10 @@ export default function Booking() {
       fkVehicleId: vId
     };
     console.log(reqBody);
-    axiosInstance.post(`http://localhost:8080/api/v1/Reservation/create`, reqBody)
+    axiosInstance.post(`http://localhost:8080/api/v1/reservation/create`, reqBody)
       .then((r) => {
         console.log(r);
-        if (r?.data === true) {
-          alert("Your Booking is compleate");
-        }
+        alert(r.data.message);
       });
 
   }
@@ -122,10 +112,10 @@ export default function Booking() {
             </Card.Header>
             <Card.Body className="ms-3 me-3 mb-3" style={{ background: "#bfb8de", color: "darkslateblue" }} >
               <Form className="container">
-                <Row>
+                <Row className="">
                   <Col>
                     <Form.Group controlId="reservationForm.vehicleType">
-                      <Form.Label className="mb-2 mx-1 mt-5"> Vehicle Type </Form.Label>
+                      <Form.Label className=" mx-1 mt-5"> Vehicle Type </Form.Label>
                       <Form.Select className="mb-4" onChange={(event) => setType(event.target.value)}>
                         {SelectVehicle}
                       </Form.Select>
@@ -133,37 +123,42 @@ export default function Booking() {
                   </Col>
                   <Col>
                     <Form.Group controlId="reservationForm.noOfPassengers">
-                      <Form.Label className="mb-2 mx-1 mt-5">Number Of Passengers</Form.Label>
+                      <Form.Label className=" mx-1 mt-5">Number Of Passengers</Form.Label>
                       <Form.Control value={passangers} onChange={(event) => setPassangers(event.target.value)} type="number" className="mb-4"
                         onBlur={() => {
                           if (passangers < 1) {
-                            setError("insert value must be positive");
+                            setError("value should be positive");
                           } else {
                             setError("");
                           }
                         }} />
-                      {error && <div style={{ color: "red" }}>{error}</div>}
                     </Form.Group>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="mt-2">
                   <Col>
                     <Form.Group controlId="reservationForm.date">
-                      <Form.Label className="mb-2 mx-1">Date</Form.Label>
+                      <Form.Label className="mx-1">Date</Form.Label>
                       <Form.Control onChange={(event) => setDate(event.target.value)} type="date" className="mb-4" />
                     </Form.Group>
                   </Col>
                   <Col>
                     <Form.Group controlId="reservationForm.noOfDays">
-                      <Form.Label className="mb-2 mx-1"> For how many days? </Form.Label>
-                      <Form.Control type="number" placeholder="Maximum is 4" onChange={(event) => setDates(event.target.value)} className="mb-4" />
+                      <Form.Label className="mx-1"> For how many days? </Form.Label>
+                      <Form.Control type="number" placeholder="Maximum is 4" onChange={(event) => setDates(event.target.value)} className="mb-4" onBlur={() => {
+                          if (dates < 1) {
+                            setError("value should be positive");
+                          } else {
+                            setError("");
+                          }
+                        }} />
                     </Form.Group>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="mt-2">
                   <Col>
                     <Form.Group controlId="reservationForm.area" className="mb-xl-5">
-                      <Form.Label className="mb-2 mx-1">Searching area </Form.Label>
+                      <Form.Label className=" mx-1">Searching area </Form.Label>
                       <Form.Select onChange={(event) => setTown(event.target.value)}>
                         {selectAreas}
                       </Form.Select>
@@ -172,7 +167,7 @@ export default function Booking() {
                 </Row>
 
                 {/* <Row> <Map/> </Row> */}
-
+                {error && <div className="mb-2" style={{ color: "red" }}>{error}</div>}
                 <Button type="button" className="text-center  text-black" onClick={search} variant="outline-secondary">
                   Search
                 </Button>
