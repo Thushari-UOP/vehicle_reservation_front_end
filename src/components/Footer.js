@@ -5,7 +5,7 @@ export default function Footer() {
     <div >
       <footer className="fixed-position">
         <div className="w-100 bg-black text-center">
-          <p className="text-light m-auto pt-1" style={{height:"30px"}}>VRS Create by Thushari Herath</p>
+          <p className="text-light m-auto pt-1" style={{height:"30px"}}>VRSys Create by Thushari Herath</p>
         </div>
       </footer>
     </div>
