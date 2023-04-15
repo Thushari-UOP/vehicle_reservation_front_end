@@ -7,19 +7,19 @@ export default function DriveDashSideBar() {
         <div>
             <div
                 className="mt-3"
-                style={{ minHeight: "100%" ,zIndex:'1', maxWidth: "275px", backgroundColor: " #bfb8de" }}
+                style={{ minHeight: "100%" , maxWidth: "275px", backgroundColor: " #bfb8de" }}
             >
                 <Nav className="flex-column p-5">
                     <Nav className="pb-3 fw-bold gx-xl-4">
-                        <Link to={"/Passenger/Profile"} style={{ color: "darkblue" }}>Profile</Link>
+                        <Link to={"/passenger/profile"} style={{ color: "darkblue" }}>Profile</Link>
                     </Nav>
 
                     <Nav className="pb-3 fw-bold gx-xl-4">
-                        <Link to={"/Booking"} style={{ color: "darkblue" }}>Booking</Link>
+                        <Link to={"/booking"} style={{ color: "darkblue" }}>Booking</Link>
                     </Nav>
 
                     <Nav className="pb-3 fw-bold gx-xl-4">
-                        <Link to={"/Passenger/Hist"} style={{ color: "darkblue" }}>Histry</Link>
+                        <Link to={"/passenger/hist"} style={{ color: "darkblue" }}>Reservations</Link>
                     </Nav>
 
                     {/* <Nav className="pb-3 fw-bold gx-xl-4">

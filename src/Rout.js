@@ -50,7 +50,7 @@ export default function Rout() {
 
         {/* Passenger Dashbords */}
         <Route
-          path="/Passenger/Hist"
+          path="/passenger/hist"
           element={
             <ProtectedRoute>
               <Hist />

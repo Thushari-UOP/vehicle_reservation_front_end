@@ -105,77 +105,91 @@ export default function Booking() {
           <PassengerDashSideBar />
         </Col>
 
-        <Col className="col-10">
-          <Card className="mt-5 ms-5 border-opacity-50 mb-5 w-50">
-            <Card.Header as="h5" className="text-center text-white-50 fw-bold" style={{ backgroundColor: "darkslateblue" }}>
+        <Col className="">
+
+          <div style={{
+            backgroundImage:
+              "url('https://res.cloudinary.com/comparis-cms/image/upload/c_fill,g_center,w_256,ar_1,f_auto,q_auto/v1623330489/carfinder/2ndlevelpage/USPs/USP2_g4f4jf.svg')",
+            backgroundSize: "340px",
+            backgroundPosition: "100% 100%",
+            backgroundAttachment: "fixed",
+            backgroundRepeat: "no-repeat"
+          }}>
+            <h3 className="mt-5 ms-5 d-flex opacity-50">Search Vehicles And Book</h3>
+            <hr className="mt-3 ms-5 opacity-50" />
+            <Card className="mt-5 ms-5 border-opacity-50 mb-5 w-50">
+              {/* <Card.Header as="h5" className="text-center text-white-50 fw-bold" style={{ backgroundColor: "darkslateblue" }}>
               Search Vehicles
-            </Card.Header>
-            <Card.Body className="ms-3 me-3 mb-3" style={{ background: "#bfb8de", color: "darkslateblue" }} >
-              <Form className="container">
-                <Row className="">
-                  <Col>
-                    <Form.Group controlId="reservationForm.vehicleType">
-                      <Form.Label className=" mx-1 mt-5"> Vehicle Type </Form.Label>
-                      <Form.Select className="mb-4" onChange={(event) => setType(event.target.value)}>
-                        {SelectVehicle}
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Group controlId="reservationForm.noOfPassengers">
-                      <Form.Label className=" mx-1 mt-5">Number Of Passengers</Form.Label>
-                      <Form.Control value={passangers} onChange={(event) => setPassangers(event.target.value)} type="number" className="mb-4"
-                        onBlur={() => {
-                          if (passangers < 1) {
-                            setError("value should be positive");
-                          } else {
-                            setError("");
-                          }
-                        }} />
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row className="mt-2">
-                  <Col>
-                    <Form.Group controlId="reservationForm.date">
-                      <Form.Label className="mx-1">Date</Form.Label>
-                      <Form.Control onChange={(event) => setDate(event.target.value)} type="date" className="mb-4" />
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Group controlId="reservationForm.noOfDays">
-                      <Form.Label className="mx-1"> For how many days? </Form.Label>
-                      <Form.Control type="number" placeholder="Maximum is 4" onChange={(event) => setDates(event.target.value)} className="mb-4" onBlur={() => {
-                          if (dates < 1) {
-                            setError("value should be positive");
-                          } else {
-                            setError("");
-                          }
-                        }} />
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row className="mt-2">
-                  <Col>
-                    <Form.Group controlId="reservationForm.area" className="mb-xl-5">
-                      <Form.Label className=" mx-1">Searching area </Form.Label>
-                      <Form.Select onChange={(event) => setTown(event.target.value)}>
-                        {selectAreas}
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-                </Row>
+            </Card.Header> */}
+              <div className="mt-3">
+                <Card.Body className="ms-3 me-3 mb-3" style={{ background: "rgb(174 213 199)", color: "darkslateblue" }} >
+                  <h6 className="text-dark mt-2">Select all feild and search a vehicle</h6>
+                  <Form className="container">
+                    <Row className="mt-4">
+                      <Col>
+                        <Form.Group controlId="reservationForm.vehicleType">
+                          <Form.Label className="mx-1"> Vehicle Type </Form.Label>
+                          <Form.Select className="mb-4" onChange={(event) => setType(event.target.value)}>
+                            {SelectVehicle}
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group controlId="reservationForm.noOfPassengers">
+                          <Form.Label className=" mx-1">Number Of Passengers</Form.Label>
+                          <Form.Control value={passangers} onChange={(event) => setPassangers(event.target.value)} type="number" className="mb-4"
+                            onBlur={() => {
+                              if (passangers < 1) {
+                                setError("value should be positive");
+                              } else {
+                                setError("");
+                              }
+                            }} />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row className="mt-2">
+                      <Col>
+                        <Form.Group controlId="reservationForm.date">
+                          <Form.Label className="mx-1">Date</Form.Label>
+                          <Form.Control onChange={(event) => setDate(event.target.value)} type="date" className="mb-4" />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group controlId="reservationForm.noOfDays">
+                          <Form.Label className="mx-1"> For how many days? </Form.Label>
+                          <Form.Control type="number" placeholder="" onChange={(event) => setDates(event.target.value)} className="mb-4" onBlur={() => {
+                            if (dates < 1) {
+                              setError("value should be positive");
+                            } else {
+                              setError("");
+                            }
+                          }} />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row className="mt-2">
+                      <Col>
+                        <Form.Group controlId="reservationForm.area" className="mb-4">
+                          <Form.Label className=" mx-1">Searching area </Form.Label>
+                          <Form.Select onChange={(event) => setTown(event.target.value)}>
+                            {selectAreas}
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                    </Row>
 
-                {/* <Row> <Map/> </Row> */}
-                {error && <div className="mb-2" style={{ color: "red" }}>{error}</div>}
-                <Button type="button" className="text-center  text-black" onClick={search} variant="outline-secondary">
-                  Search
-                </Button>
+                    {/* <Row> <Map/> </Row> */}
+                    {error && <div className="mb-2" style={{ color: "red" }}>{error}</div>}
+                    <Button type="button" className="text-center  text-black" onClick={search} variant="outline-secondary">
+                      Search
+                    </Button>
 
-              </Form>
-            </Card.Body>
-          </Card>
-
+                  </Form>
+                </Card.Body>
+              </div>
+            </Card>
+          </div>
           {/* search vehicles display */}
 
 
@@ -205,7 +219,7 @@ export default function Booking() {
                 </div>
               </div>
             ) : (
-              <p>There Is No Matching Vehicles</p>
+              <h6 className="ms-5" >There Is No Matching Vehicles</h6>
             )}
           </div>
 
@@ -218,7 +232,7 @@ export default function Booking() {
               <p>Name : {driver.firstName} {driver.lastName}</p>
               <p>Telephone Number : {driver.telephone}</p>
               <p>E-mail : {driver.email}</p>
-              <p>Date of Birt : {driver.dob}</p>
+              <p>Date of Birth : {driver.dob}</p>
               <hr />
               <div className="d-flex justify-content-end">
                 <Button onClick={() => { setShow1(false); setShow2(false) }} variant="outline-success" className="me-5">Back</Button>

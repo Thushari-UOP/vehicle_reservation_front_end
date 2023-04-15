@@ -1,11 +1,10 @@
-import React from 'react'
-import { Container, Row, Col, Card } from 'react-bootstrap'
-import DriveDashSideBar from './DriveDashSideBar'
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import DriveDashSideBar from "./DriveDashSideBar";
 import Header from "../../Components/Header";
 
 function DriveCalander() {
   return (
-
     <div>
       <Header />
       <Container className="ms-0 mt-5">
@@ -17,16 +16,12 @@ function DriveCalander() {
             <DriveDashSideBar />
           </Col>
           <Col>
-            <Card className="mt-5 mb-lg-5 ms-4 border-dark border-opacity-50">
-
-
-
-            </Card>
+            <Card className="mt-5 mb-lg-5 ms-4 border-dark border-opacity-50"></Card>
           </Col>
         </Row>
       </Container>
     </div>
-  )
+  );
 }
 
-export default DriveCalander
+export default DriveCalander;

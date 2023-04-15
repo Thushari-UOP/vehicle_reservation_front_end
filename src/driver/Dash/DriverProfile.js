@@ -24,26 +24,36 @@ export default function DriverProfile() {
   };
 
   return (
-    <div style={{ backgroundImage: "url('https://th.bing.com/th/id/R.34638c57ac25511766fe9f8ed0ee5b20?rik=GuoRjNTw970TXA&pid=ImgRaw&r=0')",backgroundPositionX:"right",
-    backgroundPositionY: "-356px",
-    backgroundAttachment: "fixed"}}>
+    <div
+      style={{
+        backgroundImage:
+          "url('https://assets.cars24.com/production/c2b-website/230413172716/js/6f1a072ad060cf974f32b13a7fefe2ee.svg')",
+        backgroundPosition:"100% 106px",
+        backgroundAttachment: "fixed",
+        backgroundSize:"85%",
+        backgroundRepeat:"no-repeat"
+      }}
+    >
       <Container className="ms-0 mt-5">
         <Row>
           <Col
             className=""
             style={{ marginLeft: "-12px", display: "contents" }}
           >
-            <DriveDashSideBar style={{ height: "100%" }} />
+            <DriveDashSideBar style={{ height: "100%"}} />
           </Col>
-          <Col >
-            <h3 className="mt-5 ms-4 font-weight-bold fw-bolder opacity-75">
-              Profile
-            </h3>
-            <hr className="ms-4" />
-            <Card className="mt-4 ms-5 mb-5 border-0" style={{background: "#e4e0f4f5"}}>
+          <Col>
+            <h3 className="mt-5 ms-5 d-flex opacity-50">Profile</h3>
+            <hr className="mt-3 ms-5 opacity-50" />
+            <Card
+              className="mt-4 ms-5 mb-5 border-0 shadow-sm"
+              style={{ background: "rgb(246 246 246 / 92%)" }}
+            >
               <Card.Body
-                className="ms-4 mb-4 mt-4 me-4 shadow"
-                style={{ background: "rgb(109 84 220 / 25%)", color: "darkslateblue" }}
+                className="ms-4 mb-4 mt-4 me-4 "
+                style={{
+                  color: "darkslateblue",
+                }}
               >
                 <Card.Subtitle className="text-decoration-underline mt-4 fw-bold">
                   Driver Details
@@ -88,24 +98,23 @@ export default function DriverProfile() {
                 </Card.Subtitle>
 
                 <VehicleListComponent />
-
               </Card.Body>
               <div className="align-self-end mb-4">
-              <Button
-                  className="text-opacity-25 me-5 shadow" 
+                <Button
+                  className="text-opacity-25 me-5 shadow"
                   variant="outline-success"
                   size="sm"
                 >
-                 Update Details
+                  Update Details
                 </Button>
                 <Button
-                  className="text-opacity-25 shadow ms-4 me-4" 
+                  className="text-opacity-25 shadow ms-4 me-4"
                   variant="outline-danger"
                   size="sm"
                 >
                   Remove Account
                 </Button>
-                </div>
+              </div>
             </Card>
           </Col>
         </Row>

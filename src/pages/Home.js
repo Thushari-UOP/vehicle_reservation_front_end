@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="pt-5">
       <section
-        className="row"
+        className="row mt-3"
         style={{
           width: "101%",
           height: "445px",

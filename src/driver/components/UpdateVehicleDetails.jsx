@@ -1,20 +1,33 @@
 import React, { Component } from "react";
 import DriverService from "../../Service/DriverService";
-import { Form, FormText, Col, Button, Card} from "react-bootstrap";
+import { Form, Col, Button, Card } from "react-bootstrap";
 import { withRouter } from "../../Components/withRouter";
 import { decodeToken } from "../../utils/utils";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 import { Link } from "react-router-dom";
 
 const optionsArray = [
-  { key: "1", label: "Kurunegala" },
-  { key: "2", label: "Colombo" },
-  { key: "3", label: "Jaffna" },
-  { key: "4", label: "Gall"},
-  { key: "5", label: "Wariyapola"},
-  { key: "6", label: "Galagedara" },
-  { key: "7", label: "Kegall" },
-  { key: "8", label: "Kandy" },
+  { key: "1", label: "Anamaduwa" },
+  { key: "2", label: "Anuradhapura" },
+  { key: "3", label: "Chilaw" },
+  { key: "4", label: "Colombo" },
+  { key: "5", label: "Dambulla" },
+  { key: "6", label: "Galgamuwa" },
+  { key: "7", label: "Gampaha" },
+  { key: "8", label: "Ganewatta" },
+  { key: "9", label: "Ja-Ela" },
+  { key: "10", label: "Kandy" },
+  { key: "11", label: "Kegall" },
+  { key: "12", label: "Kekirawa" },
+  { key: "13", label: "Kuliyapitiya" },
+  { key: "14", label: "Kurunegala" },
+  { key: "15", label: "Maho" },
+  { key: "16", label: "Mathale" },
+  { key: "17", label: "Mawathagama" },
+  { key: "18", label: "Negombo" },
+  { key: "19", label: "Pannala" },
+  { key: "20", label: "Puttalam" },
+
 ];
 
 class UpdateVehicleDetails extends Component {
@@ -79,25 +92,25 @@ class UpdateVehicleDetails extends Component {
       fkDriverId: decodeToken().user.driverId,
       serviceAreas: this.state.serviceAreaId
     }
-    
+
     if (this.state.vehicleId > -1) {
       DriverService.updateVehicleDetails(this.state.vehicleId, vehicleDetails)
-      .then(() => {
-        const { navigate } = this.props;
-        navigate('/driver/profile');
-      });
+        .then(() => {
+          const { navigate } = this.props;
+          navigate('/driver/profile');
+        });
       console.log("vehicleUpdateDetails =>" + JSON.stringify(vehicleDetails));
     } else {
       console.log(this.state);
       console.log(vehicle);
       DriverService.addVehicle(vehicle)
-      .then((res) => {
-        if(res?.data === true){
-          alert("Vehicle Registation is compleate");
-          const { navigate } = this.props;
-          navigate('/driver/profile');
-        }
-      });
+        .then((res) => {
+          if (res?.data === true) {
+            alert("Vehicle Registation is compleate");
+            const { navigate } = this.props;
+            navigate('/driver/profile');
+          }
+        });
     }
   };
 
@@ -112,9 +125,9 @@ class UpdateVehicleDetails extends Component {
 
   getTitle() {
     if (this.state.vehicleId > -1) {
-      return <h3 className="text-center">Update Vehicle</h3>
+      return <h3 className="text-center">Update Vehicle Details</h3>
     } else {
-      return <h3 className="text-center">Add Vehicle</h3>
+      return <h3 className="text-center">Vehicle Registation</h3>
     }
   }
 
@@ -142,160 +155,163 @@ class UpdateVehicleDetails extends Component {
     console.log(event);
   }
 
+  render() {
 
-  render(
-
-
-
-  ) {
     return (
       <>
-        <div className="mt-5 bg-black">
-          <Card className="mt-5">
-            <Form className="mx-auto w-75 mt-5">
-              <FormText className="mt-5 ms-5">
-                {this.getTitle()}
-              </FormText>
-
-              <Form.Group
-                as={Col}
-                md="6"
-                controlId="type"
-                className="mt-5"
-              >
-                <Form.Label>Vehicle Type</Form.Label>
-                <Form.Control
-                  required
-                  checked
-                  placeholder="VAN / CAR / BUS"
-                  type={"text"}
-                  name="type"
-                  value={this.state.type}
-                  onChange={this.typeHandler}
-                  size="sm"
-                />
-              </Form.Group>
-
-              <Form.Group
-                as={Col}
-                md="6"
-                controlId="vehicleNumber"
-                className="mt-2"
-              >
-                <Form.Label>Vehicle Number</Form.Label>
-                <Form.Control
-                  required
-                  checked
-                  type={"text"}
-                  name="vehicleNumber"
-                  value={this.state.vehicleNumber}
-                  onChange={this.vehicleNumberHandler}
-                  size="sm"
-                />
-              </Form.Group>
-
-              <Form.Group
-                as={Col}
-                md="7"
-                controlId="insuranceNo"
-                className="mt-3"
-              >
-                <Form.Label>Insurance Number</Form.Label>
-                <Form.Control
-                  required
-                  type={"text"}
-                  size="sm"
-                  name="insuranceNo"
-                  value={this.state.insuranceNo}
-                  onChange={this.insuranceNoHandler}
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} md="7" controlId="maxDays" className="mt-3">
-                <Form.Label>Maximum No of Days for a Trip</Form.Label>
-                <Form.Control
-                  required
-                  type={"number"}
-                  name="maxDays"
-                  value={this.state.maxDays}
-                  onChange={this.maxDaysHandler}
-                  size="sm"
-                />
-              </Form.Group>
-
-              <Form.Group
-                as={Col}
-                md="7"
-                controlId="maxLength"
-                className="mt-3"
-              >
-                <Form.Label>Maximum length for a Trip</Form.Label>
-                <Form.Control
-                  required
-                  type={"number"}
-                  name="maxLength"
-                  value={this.state.maxLength}
-                  onChange={this.maxLengthHandler}
-                  size="sm"
-                />
-              </Form.Group>
-
-              <Form.Group
-                as={Col}
-                md="7"
-                controlId="maxPassengers"
-                className="mt-3"
-              >
-                <Form.Label>Maximum No of Passengers</Form.Label>
-                <Form.Control
-                  required
-                  type={"number"}
-                  name="maxPassengers"
-                  value={this.state.maxPassengers}
-                  onChange={this.maxPassengersHandler}
-                  size="sm"
-                />
-              </Form.Group>
-
-              <Form.Group
-                as={Col}
-                md="7"
-                controlId="area"
-                className="mt-3"
-              >
-                <Form.Label>Service Areas</Form.Label>
-                <DropdownMultiselect
-                  value={optionsArray.keys()}
-                  handleOnChange={(e) => this.areaHandler(e)}
-                  options={optionsArray}
-                  name="area"
-                />
-              </Form.Group>
-
-              <Form.Group className="mt-4" controlId="formBasicCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="Above all details are true."
-                />
-              </Form.Group>
-
-              <Form.Group className="row">
-                <Button
-                  type={"button"}
-                  className="mb-5 mt-5 ms-5 me-5 col-2"
-                  onClick={this.updateVehicleDetails}
+        <div className="mt-5" >
+          <Card className="mt-5 ">
+            <h3 className="mt-5 ms-5 d-flex opacity-50"> {this.getTitle()} </h3>
+            <hr className="mt-1 ms-5 opacity-50" />
+            <div className="ms-5" style={{
+              backgroundImage:
+                "url('https://www.hdfcergo.com/images/default-source/car-insurance/e-challan-system-for-traffic-law-enforcement.jpg')",
+              backgroundPosition:"131% 198%",
+              backgroundAttachment: "fixed",
+              backgroundRepeat:"no-repeat"
+            }}>
+              <Form className="mx-auto ms-5">
+                <Form.Group
+                  as={Col}
+                  md="5"
+                  controlId="type"
+                  className="mt-3"
                 >
-                  {this.getButtonTitle()}
-                </Button>
-                <Link to={"/driver/profile"} className="mb-5 mt-5 ms-5 me-2 col-2">
+                  <Form.Label>Vehicle Type</Form.Label>
+                  <Form.Control
+                    required
+                    checked
+                    placeholder="VAN / CAR / BUS"
+                    type={"text"}
+                    name="type"
+                    value={this.state.type}
+                    onChange={this.typeHandler}
+                    size="sm"
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  md="5"
+                  controlId="vehicleNumber"
+                  className="mt-4"
+                >
+                  <Form.Label>Vehicle Number</Form.Label>
+                  <Form.Control
+                    required
+                    checked
+                    type={"text"}
+                    name="vehicleNumber"
+                    value={this.state.vehicleNumber}
+                    onChange={this.vehicleNumberHandler}
+                    size="sm"
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  md="5"
+                  controlId="insuranceNo"
+                  className="mt-4"
+                >
+                  <Form.Label>Insurance Number</Form.Label>
+                  <Form.Control
+                    required
+                    type={"text"}
+                    size="sm"
+                    name="insuranceNo"
+                    value={this.state.insuranceNo}
+                    onChange={this.insuranceNoHandler}
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} md="5" controlId="maxDays" className="mt-4">
+                  <Form.Label>Maximum No of Days for a Trip</Form.Label>
+                  <Form.Control
+                    required
+                    type={"number"}
+                    name="maxDays"
+                    value={this.state.maxDays}
+                    onChange={this.maxDaysHandler}
+                    size="sm"
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  md="5"
+                  controlId="maxLength"
+                  className="mt-4"
+                >
+                  <Form.Label>Maximum length for a Trip</Form.Label>
+                  <Form.Control
+                    required
+                    type={"number"}
+                    name="maxLength"
+                    value={this.state.maxLength}
+                    onChange={this.maxLengthHandler}
+                    size="sm"
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  md="5"
+                  controlId="maxPassengers"
+                  className="mt-4"
+                >
+                  <Form.Label>Maximum No of Passengers</Form.Label>
+                  <Form.Control
+                    required
+                    type={"number"}
+                    name="maxPassengers"
+                    value={this.state.maxPassengers}
+                    onChange={this.maxPassengersHandler}
+                    size="sm"
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  as={Col}
+                  md="5"
+                  controlId="area"
+                  className="mt-4"
+                >
+                  <Form.Label>Service Areas</Form.Label>
+                  <DropdownMultiselect
+                    value={optionsArray.keys()}
+                    handleOnChange={(e) => this.areaHandler(e)}
+                    options={optionsArray}
+                    name="area"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mt-4" controlId="formBasicCheckbox">
+                  <Form.Check
+                    type="checkbox"
+                    label="Above all details are true."
+                  />
+                </Form.Group>
+
+                <Form.Group className="row">
                   <Button
                     type={"button"}
+                    className="mb-5 mt-5 ms-5 me-5 col-2 btn-light btn-outline-success"
+                    onClick={this.updateVehicleDetails}
                   >
-                    Cancell
+                    {this.getButtonTitle()}
                   </Button>
-                </Link>
-              </Form.Group>
-            </Form>
+                  <Link to={"/driver/profile"} className="mb-5 mt-5 ms-5 me-2 col-2 ">
+                    <Button
+                      type={"button"}
+                      className="btn-light btn-outline-success"
+                    >
+                      Cancell
+                    </Button>
+                  </Link>
+                </Form.Group>
+              </Form>
+            </div>
           </Card>
         </div>
       </>
