@@ -47,7 +47,7 @@ export default function DriverProfile() {
             <hr className="mt-3 ms-5 opacity-50" />
             <Card
               className="mt-4 ms-5 mb-5 border-0 shadow-sm"
-              style={{ background: "rgb(246 246 246 / 92%)" }}
+              style={{ background: "rgb(246 246 246 / 34%)" }}
             >
               <Card.Body
                 className="ms-4 mb-4 mt-4 me-4 "
@@ -99,20 +99,13 @@ export default function DriverProfile() {
 
                 <VehicleListComponent />
               </Card.Body>
-              <div className="align-self-end mb-4">
+              <div className="align-self-start ms-5 mb-4">
                 <Button
                   className="text-opacity-25 me-5 shadow"
                   variant="outline-success"
-                  size="sm"
+                  // size="sm"
                 >
                   Update Details
-                </Button>
-                <Button
-                  className="text-opacity-25 shadow ms-4 me-4"
-                  variant="outline-danger"
-                  size="sm"
-                >
-                  Remove Account
                 </Button>
               </div>
             </Card>

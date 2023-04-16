@@ -202,7 +202,7 @@ export default function Booking() {
 
                   {sVehicles.map((sVehicles) =>
                     <Card className="shadow col-3 mx-auto" key={sVehicles.vehicleId}>
-                      <Card.Img variant="top" src="holder.js/100px180" />
+                      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                       <Card.Body>
                         <Card.Title className="text-center">Available</Card.Title>
                         <Card.Text className="sm font fst-italic"> Before Your Booking Please Contact Driver And Make comfermation </Card.Text>

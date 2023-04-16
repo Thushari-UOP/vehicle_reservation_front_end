@@ -5,6 +5,7 @@ import PassengerDashSideBar from "./PassengerDashSideBar";
 import { decodeToken } from "../../utils/utils";
 import axiosInstance from "../../axios/axios-instance";
 import { useState } from "react";
+import img1 from "../../Images/4088034.png";
 
 export default function Histry() {
 
@@ -75,18 +76,22 @@ export default function Histry() {
 
                         <Card className="shadow col-11 mx-auto mb-4 border-0" key={reservation.reservationId}>
                           {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-                          <Card.Body>
+                          <Card.Body className="col-6">
                             <Card.Title className="text-center"></Card.Title>
-                            <Card.Text className="sm font fst-italic"></Card.Text>
-                            <h6 className="ms-4">Reservation Id        : {reservation.reservationId}</h6>
-                            <h6 className="ms-4">Date                  : {reservation.date}</h6>
-                            <h6 className="ms-4">Number of Passengers  : {reservation.passengers}</h6>
-                            <h6 className="ms-4">Number of Days        : {reservation.days}</h6>
-                            <h6 className="ms-4">Pickup Location       : {reservation.pickupLocation}</h6>
-                            <h6 className="ms-4">Drop Location         : {reservation.dropLocation}</h6>
+                            <div>
+                              <h6 className="ms-4">Reservation Id        : {reservation.reservationId}</h6>
+                              <h6 className="ms-4">Date                  : {reservation.date}</h6>
+                              <h6 className="ms-4">Number of Passengers  : {reservation.passengers}</h6>
+                              <h6 className="ms-4">Number of Days        : {reservation.days}</h6>
+                              <h6 className="ms-4">Pickup Location       : {reservation.pickupLocation}</h6>
+                              <h6 className="ms-4">Drop Location         : {reservation.dropLocation}</h6>
+                            </div>
+
                             {/* driver details display as alert. alert in above */}
                             {!show1 && <Button href="#details" variant="outline-success" size="sm" className="ms-4" onClick={() => { setShow1(true); setReservationId(reservation.reservationId); loadeDriverDetails(reservation.reservationId); }}>Driver Details</Button>}
+                          
                           </Card.Body>
+                          {/* <img src={img1} alt="" style={{ height: "100px" , width:"100px" }} /> */}
 
                         </Card>
                       )}

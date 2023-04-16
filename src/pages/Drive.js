@@ -1,32 +1,31 @@
 import React from "react";
-import {Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Drive() {
   return (
-    <div className="">
-      <div className="p-5 align-items-md-center"
-      style={{
-        background: "#a4daff",
-        backgroundImage:
-          "url(https://www.netsolutions.com/insights/wp-content/uploads/2020/12/the-10-best-rideshare-apps-of-2021.webp)",
-        height: "490px",
-        backgroundColor: "#ecfbff",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "contain",
-        backgroundpositionx: "inherit",
-        marginTop:"65px"
-      }}>
-
-        <div className="row p-4 ">
-          <Link to="/drive/sign-in"  style={{paddingLeft: "75%"}}>
-            <Button variant="outline-dark" className="m-5 justify-content-end" >
+    <div>
+      <div
+        style={{
+          background: "#a4daff",
+          backgroundImage: "url(Images/drive_image.png)",
+          // "url(https://www.netsolutions.com/insights/wp-content/uploads/2020/12/the-10-best-rideshare-apps-of-2021.webp)",
+          height: "525px",
+          backgroundSize: "cover",
+          backgroundpositionx: "inherit",
+          marginTop: "65px",
+        }}
+         className="d-flex align-items-center justify-content-center"
+      >
+        <div className="d-flex align-items-center">
+          <Link to="/drive/sign-in">
+            <Button variant="outline-light" className="me-5 col-12">
               Sign In
             </Button>
           </Link>
 
-          <Link to="/driver/registation" style={{paddingLeft: "75%"}}>
-            <Button variant="outline-dark" className="m-5 justify-content-end" >
+          <Link to="/driver/registation">
+            <Button variant="outline-light" className="ms-5 col-12">
               Sign Up
             </Button>
           </Link>

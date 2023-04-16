@@ -43,9 +43,9 @@ class VehicleListComponent extends Component {
   render() {
     return (
       <div className="row">
-        <table className="table table-striped table-hover table-bordered">
+        <table className="table table-dark table-hover table-bordered">
           <thead>
-            <tr className="fw-bold">
+            <tr className="fw-bold table-active">
               <th>Id</th>
               <th>Number</th>
               <th>Ins_No</th>
@@ -96,63 +96,3 @@ class VehicleListComponent extends Component {
   }
 }
 export default withRouter(VehicleListComponent);
-
-// import axios from 'axios';
-// import React, { useEffect, useState } from 'react'
-// import { Button } from 'react-bootstrap';
-
-// export default function VehicleListComponent() {
-
-//   const [vehicles, setVehicles] = useState([]);
-
-//   const userName = "lkfauo";
-
-//   useEffect(()=> {
-//     loadVehicles();
-//   },[]);
-
-//   const loadVehicles = async () => {
-//     const result = await axios.get("http://localhost:8080/api/v1/driver/" + userName + "/allVehicles");
-//     console.log(result.data);
-//   }
-
-//   return (
-//           <div className="row">
-//             {/* <table className="table table-striped table-hover table-bordered">
-//               <thead>
-//                 <tr>
-//                   <th>Id</th>
-//                   <th>Number</th>
-//                   <th>Ins_No</th>
-//                   <th>Max_days</th>
-//                   <th>Max_length</th>
-//                   <th>Max_pas</th>
-//                   <th>Type</th>
-//                   <th>Action</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {this.state.vehicles.map((vehicle) => (
-//                   <tr key={vehicle.vehicleNumber}>
-//                     <td>{vehicle.vehicleId}</td>
-//                     <td>{vehicle.vehicleNumber}</td>
-//                     <td>{vehicle.insuranceNo}</td>
-//                     <td>{vehicle.maxDays}</td>
-//                     <td>{vehicle.maxLength}</td>
-//                     <td>{vehicle.maxPassengers}</td>
-//                     <td>{vehicle.type}</td>
-//                     <td>
-
-//                       <button onClick={()=>this.updateVehicleDetails(vehicle.vehicleId)} className="btn btn-outline-secondary my-auto me-2">Update</button>
-//                       <button onClick={()=>this.deleteVehicleDetails(vehicle.vehicleId)} className="btn btn-outline-danger my-auto">Delete</button>
-
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-
-//             </table>
-//             <Button variant="outline-light" className="btn shadow-sm col-3 mt-3 mb-2" onClick={this.addVehicle}>Add Vehicle</Button> */}
-//           </div>
-//         );
-// }
