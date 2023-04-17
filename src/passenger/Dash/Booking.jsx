@@ -242,6 +242,7 @@ export default function Booking() {
 
             <Alert show={show2} variant="success" className="col-6 ms-4">
               <h5 >Reservation Details</h5>
+              <a href="https://www.google.com/maps">Google Map</a>
               <hr />
               <Form className="w-75 mx-auto">
                 <Form.Group controlId="date2">
@@ -260,13 +261,15 @@ export default function Booking() {
                 </Form.Group>
 
                 <Form.Group controlId="pickup">
-                  <Form.Label className="mb-2 mx-1 mt-2">Pickup Location</Form.Label>
-                  <Form.Control placeholder="pickup location name" onChange={(event) => setPickup(event.target.value)} name="pickup" type="text" className="mb-4" />
+                  <Form.Label className="mb-2 mx-1 mt-2">Pickup Location (you can add map location) 
+                  
+                  </Form.Label>
+                  <Form.Control placeholder="pickup location URL / address" onChange={(event) => setPickup(event.target.value)} name="pickup" type="text" className="mb-4" />
                 </Form.Group>
 
                 <Form.Group controlId="drop" required>
-                  <Form.Label className="mb-2 mx-1 mt-2">Drop Location</Form.Label>
-                  <Form.Control placeholder="drop location name" onChange={(event) => setDrop(event.target.value)} name="drop" type="text" className="mb-4" />
+                  <Form.Label className="mb-2 mx-1 mt-2">Drop Location (you can add map location)  </Form.Label>
+                  <Form.Control placeholder="drop location URL / address" onChange={(event) => setDrop(event.target.value)} name="drop" type="text" className="mb-4" />
                 </Form.Group>
                 <hr />
                 <div className="d-flex justify-content-end">

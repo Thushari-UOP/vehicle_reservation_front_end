@@ -40,10 +40,23 @@ export default function Reservation() {
       )
       .then((res) => {
         setPassengerDetails(res.data.passenger);
-        console.log(reservationId);
         console.log(res.data);
       });
   };
+
+  function createTag(location) {
+    let url;
+    try {
+      url = new URL(location);
+    } catch (_) {
+      url = null;
+    }
+    if (url) {
+      return <a href={url.href}>open location in map</a>;
+    } else {
+      return <p>{location}</p>;
+    }
+  }
 
   return (
     <div>
@@ -111,10 +124,10 @@ export default function Reservation() {
                                   <Row>
                                     <Col className="list-group-item">
                                       Pickup Location : &nbsp;&nbsp;
-                                      {reservation.pickupLocation}
+                                      {createTag(reservation.pickupLocation)}
                                     </Col>
                                     <Col className="list-group-item">
-                                      Drop Location : &nbsp;&nbsp; {reservation.dropLocation}
+                                      Drop Location : &nbsp;&nbsp; {createTag(reservation.dropLocation)}
                                     </Col>
                                   </Row>
                                   <Row>
@@ -129,8 +142,6 @@ export default function Reservation() {
                                     <Col className="list-group-item">
                                       Date : &nbsp;&nbsp; {reservation.date}
                                     </Col>
-                                    
-                                  
                                     {/* <Col className="list-group-item">
                                       Status : {reservation.}
                                     </Col> */}
