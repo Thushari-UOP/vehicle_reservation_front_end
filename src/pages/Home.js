@@ -17,20 +17,26 @@ export default function Home() {
       >
         <img className="col-7" src={imag1} alt="" style={{ height: "445px" }} />
         <div className="col-5 mt-5">
+          <h6 className="text-center mb-4 mt-3">
+            We enable you to get and provide the services you need efficiently
+            and easily Visit us to reserve the vehicles you need as a passenger
+            in advance...
+          </h6>
+          <hr />
           <h2
-            className="mt-5 text-center fon"
+            className="mt-2 text-center"
             style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
             Reach the destination safely...
           </h2>
           <h2
-            className="mt-5 text-center"
+            className="mt-3 text-center"
             style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
             Choose a vehicle and driver of your wish...
           </h2>
           <h2
-            className="mt-5 text-center"
+            className="mt-3 text-center"
             style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
             Save time and easily plan future work...
@@ -69,9 +75,14 @@ export default function Home() {
         />
 
         <div className="">
+          
           <h2
-            className="text-center"
-            style={{ fontFamily: "cursive", fontSize: "x-large" , paddingTop:"100px"}}
+            className="text-center pt-5"
+            style={{
+              fontFamily: "cursive",
+              fontSize: "x-large",
+              // paddingTop: "100px",
+            }}
           >
             Earn many with smart way...
           </h2>
@@ -79,22 +90,27 @@ export default function Home() {
             className="mt-5 text-center"
             style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
-            Manage your time 
+            Manage your time
           </h2>
           <h2
-            className="mt-5 text-center"
+            className="mt-3 text-center"
             style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
-           And
+            And
           </h2>
           <h2
-            className="mt-5 text-center"
+            className="mt-3 mb-5 text-center"
             style={{ fontFamily: "cursive", fontSize: "x-large" }}
           >
             Plan future work easily...
           </h2>
-
-          <div className="m-5 ps-5">
+          <hr/>
+          <h5 className="px-5 text-center mb-4 mt-5">
+            Do you want to improve your services as a driver? So join us
+            Customers will be involved even if you have no prior knowledge
+            easily
+          </h5>
+          <div className=" mx-5 ps-5">
             <Link to="/drive/sign-in">
               <Button
                 variant="outline-dark"
