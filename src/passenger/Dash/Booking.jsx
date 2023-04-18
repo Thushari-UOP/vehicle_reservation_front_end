@@ -73,8 +73,8 @@ export default function Booking() {
       date: date2,
       days: days2,
       passengers: passangers2,
-      dropLocation: pickup,
-      pickupLocation: drop,
+      dropLocation: drop,
+      pickupLocation: pickup,
       fkPassengerId: decodeToken().user.passengerId,
       fkVehicleId: vId
     };
@@ -242,7 +242,7 @@ export default function Booking() {
 
             <Alert show={show2} variant="success" className="col-6 ms-4">
               <h5 >Reservation Details</h5>
-              <a href="https://www.google.com/maps">Google Map</a>
+              <a href="https://www.google.com/maps" target="_blank" rel="noreferrer">Google Map</a>
               <hr />
               <Form className="w-75 mx-auto">
                 <Form.Group controlId="date2">
